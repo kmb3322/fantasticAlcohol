@@ -10,10 +10,10 @@ interface IUser {
   diceValue: number;
 }
 
-const socket: Socket = io('http://localhost:3000');
+const socket: Socket = io('http://localhost:4000');
 
 type DiceGameProps = {
-  onGoHome: () => void; // App.tsx 로 돌아가기 위한 콜백
+  onGoHome: () => void;
 };
 
 function DiceGame({ onGoHome }: DiceGameProps) {
