@@ -97,10 +97,10 @@ const SvgButton: FC<SvgButtonProps> = ({ onClick,
           transform="translate(-50%, -50%)"
           textAlign="center"
           pointerEvents="none"
-          color="black" // 텍스트 색상 필요 시 변경 가능
+         
         >
           {overlayText && (
-            <Text fontSize="14px" fontWeight={700} opacity={0.75} mt="5px" fontFamily={'Noto Sans KR'}>
+            <Text fontSize="14px"  textColor="#14ACA4" fontWeight={700} mt="5px" fontFamily={'Noto Sans KR'}>
               {overlayText}
             </Text>
           )}
