@@ -1,13 +1,13 @@
 // src/components/MoleGameWaiting.tsx
 import {
-    Box,
-    Button,
-    HStack,
-    Input,
-    Text,
-    useBreakpointValue,
-    useToast,
-    VStack,
+  Box,
+  Button,
+  HStack,
+  Input,
+  Text,
+  useBreakpointValue,
+  useToast,
+  VStack,
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { socket } from '../socket';

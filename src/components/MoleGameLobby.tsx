@@ -124,6 +124,7 @@ function MoleGameLobby({ onJoinedRoom }: MoleGameLobbyProps) {
       >
         <FormLabel
           mb="8px"
+          ml="-30px"
           fontWeight="bold"
           fontSize="15px"
           color="#333"

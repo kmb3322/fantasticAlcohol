@@ -1,7 +1,7 @@
 // client/src/components/MoleGame.tsx
 import { useEffect, useState } from 'react';
 import { socket } from '../socket';
-import MoleGameWaiting from './\bMoleGameWaiting';
+import MoleGameWaiting from './MoleGameWaiting';
 
 interface IPlayer {
   socketId: string;
