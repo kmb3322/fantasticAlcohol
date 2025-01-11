@@ -1,6 +1,7 @@
 // client/src/components/MoleGame.tsx
 import { useEffect, useState } from 'react';
 import { socket } from '../socket';
+import MoleGameWaiting from './\bMoleGameWaiting';
 
 interface IPlayer {
   socketId: string;
@@ -108,16 +109,16 @@ function MoleGame({ roomCode, isHost, onGoHome }: MoleGameProps) {
       <h2>두더지 잡기 (방 코드: {roomCode})</h2>
       <p>현재 접속자: {playerList.length}명</p>
 
+      {/** 
+       * 여기서 "방장이 게임을 시작하기 전 상태"를
+       * 새로운 컴포넌트(MoleGameWaiting)로 분리 
+       */}
       {!gameStarted ? (
-        <div>
-          {isHost ? (
-            <button onClick={handleStartGame}>게임 시작</button>
-          ) : (
-            <p>방장이 시작하기를 기다리는 중...</p>
-          )}
-          {startGameError && <p style={{ color: 'red' }}>{startGameError}</p>}
-          <p>(최소 3명 이상 필요)</p>
-        </div>
+        <MoleGameWaiting
+          isHost={isHost}
+          startGameError={startGameError}
+          onStartGame={handleStartGame}
+        />
       ) : (
         <div>
           <h4>게임 진행 중! 남은 시간: {timeLeft}s</h4>

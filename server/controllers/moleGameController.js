@@ -210,6 +210,25 @@ function handleMoleGameConnection(socket, io) {
   });
 
   /**
+   * [채팅 추가] 채팅 메시지 수신 및 브로드캐스트
+   */
+  socket.on('mole:sendChatMessage', (message) => {
+    const { roomCode } = socket.data;
+    if (!roomCode || !rooms[roomCode]) return;
+
+    const room = rooms[roomCode];
+    if (!room.players[socket.id]) return;
+
+    const nickname = room.players[socket.id].nickname || 'unknown';
+
+    // 해당 방에 채팅 이벤트 전송
+    io.to(roomCode).emit('mole:chatMessage', {
+      nickname,
+      message,
+    });
+  });
+
+  /**
    * 연결 해제
    */
   socket.on('disconnect', () => {
