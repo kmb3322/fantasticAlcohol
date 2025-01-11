@@ -4,11 +4,10 @@ import {
   Box,
   Button,
   FormLabel,
-  Heading,
   IconButton,
   Image,
   Input,
-  Text,
+  Text
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { socket } from '../socket';
@@ -94,20 +93,25 @@ function MoleGameLobby({ onJoinedRoom }: MoleGameLobbyProps) {
       fontFamily="Noto Sans KR"
     >
       {/* 로고 & 타이틀 영역 */}
-      <Box textAlign="center" mb="40px">
-        {/* cat.png 이미지를 사용 */}
+      <Box
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        textAlign="center"
+        mb="40px"
+      >
         <Image
           width="211px"
           height="94px"
           objectFit="contain"
-          margin="0 auto 16px"
+          mb="2px"
           src="/cat.png"
-
+          alt="cat logo"
         />
-        <Heading m={0} fontSize="28px">
+        <Text fontWeight={700} fontSize="28px" opacity={0.8} mb="-2px">
           고양이 잡기
-        </Heading>
-        <Text mt="8px" fontSize="14px" color="#666">
+        </Text>
+        <Text fontSize="14px" color="#666">
           장난꾸러기 고양이를 혼쭐내주세요!
         </Text>
       </Box>
@@ -116,13 +120,12 @@ function MoleGameLobby({ onJoinedRoom }: MoleGameLobbyProps) {
       <Box
         display="flex"
         flexDirection="column"
-        alignItems="center"
-        mb="20px"
+        mb="50px"
       >
         <FormLabel
           mb="8px"
           fontWeight="bold"
-          fontSize="14px"
+          fontSize="15px"
           color="#333"
         >
           나의 닉네임
@@ -134,10 +137,9 @@ function MoleGameLobby({ onJoinedRoom }: MoleGameLobbyProps) {
           placeholder="닉네임을 입력하세요"
           w="196px"
           h="37px"
-          border="none"
-          outline="none"
           px="15px"
           borderRadius="20px"
+          border="none"
           bg="#FFF"
           boxShadow="0px 2px 13.7px 0px rgba(0, 0, 0, 0.10)"
         />
@@ -147,13 +149,12 @@ function MoleGameLobby({ onJoinedRoom }: MoleGameLobbyProps) {
       <Box
         display="flex"
         flexDirection="column"
-        alignItems="center"
         mb="24px"
       >
         <FormLabel
           mb="8px"
           fontWeight="bold"
-          fontSize="14px"
+          fontSize="15px"
           color="#333"
         >
           개설된 방에 참여하기
@@ -166,14 +167,12 @@ function MoleGameLobby({ onJoinedRoom }: MoleGameLobbyProps) {
             placeholder="방 코드를 입력"
             w="196px"
             h="37px"
-            border="none"
-            outline="none"
             px="15px"
             borderRadius="20px"
+            border="none"
             bg="#FFF"
             boxShadow="0px 2px 13.7px 0px rgba(0, 0, 0, 0.10)"
           />
-          {/* 오른쪽 원형 버튼: 화살표 아이콘 삽입 */}
           <IconButton
             aria-label="방 참여"
             icon={<ArrowForwardIcon color="white" />}
@@ -188,7 +187,21 @@ function MoleGameLobby({ onJoinedRoom }: MoleGameLobbyProps) {
         </Box>
       </Box>
 
+      
       {/* 새 방 개설하기 버튼 */}
+      <Box
+        display="flex"
+        flexDirection="column"
+        mb="24px"
+        >
+      <FormLabel
+          mb="8px"
+          fontWeight="bold"
+          fontSize="15px"
+          color="#333"
+        >
+          또는,
+        </FormLabel>
       <Button
         onClick={handleCreateRoom}
         w="195px"
@@ -205,30 +218,9 @@ function MoleGameLobby({ onJoinedRoom }: MoleGameLobbyProps) {
       >
         새로운 방 개설하기
       </Button>
-
-      {/* 아래는 현재 로직 테스트/디버그용으로 playerList를 확인하는 부분 */}
-      <Box w="80%" maxW="400px">
-        <Heading as="h4" mb="4px" fontSize="16px">
-          현재 로비에서 받은 playerList
-        </Heading>
-        <Text mt="0" fontSize="12px" color="#777">
-          ※ 로비에서 보여주는 인원은 "같은 방"에 들어온 경우만 제대로 뜰 수 있어요.
-        </Text>
-        <Text mt="4px" mb="4px" fontSize="14px">
-          현재 인원: {playerList.length}명
-        </Text>
-        <ul>
-          {playerList.map((p) => (
-            <li
-              key={p.socketId}
-              style={{ fontSize: '14px', marginBottom: '4px' }}
-            >
-              {p.nickname} ({p.score}점)
-            </li>
-          ))}
-        </ul>
-      </Box>
     </Box>
+    </Box>
+
   );
 }
 

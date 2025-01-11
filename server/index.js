@@ -19,7 +19,7 @@ io.on('connection', (socket) => {
   // 두더지 게임 소켓 로직
   handleMoleGameConnection(socket, io);
 
-  // (추가 게임: 주사위 등 있으면 여기서 handleDiceGameConnection(socket, io) 등)
+  // (추가 게임: 주사위 게임 등 있다면 여기에 handleDiceGameConnection(socket, io) 등 등록)
 });
 
 // 3분 이상 활동 없는 유저 자동 제거

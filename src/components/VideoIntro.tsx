@@ -24,7 +24,7 @@ function VideoIntro() {
   };
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100vh', overflow: 'hidden' }}>
+    <div style={{ position: 'relative', width: '100%', height: '100vh', overflow: 'hidden', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <video
         ref={videoRef}
         src="/catstory.mp4"

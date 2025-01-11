@@ -1,4 +1,5 @@
 // src/pages/LobbyPage.tsx
+import { Flex } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import MoleGameLobby from '../components/MoleGameLobby';
 
@@ -11,7 +12,11 @@ function LobbyPage() {
     navigate('/game', { state: { roomCode, isHost } });
   };
 
-  return <MoleGameLobby onJoinedRoom={handleJoinedRoom} />;
+  return (
+    <Flex direction="column" align="center" width="100%" bg="#ffffff" minWidth="100vw" minHeight="100vh">
+      <MoleGameLobby onJoinedRoom={handleJoinedRoom} />
+    </Flex>
+  );
 }
 
 export default LobbyPage;
