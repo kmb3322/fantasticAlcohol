@@ -15,7 +15,9 @@
     "@emotion/styled": "^11.14.0",
     "framer-motion": "^11.16.1",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.1.1",
+    "react-webcam": "^7.2.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
