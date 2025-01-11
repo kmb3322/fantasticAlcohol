@@ -22,7 +22,7 @@ function HomePage() {
           </Text>
 
           <Flex direction="row" gap="23px" mt="100px">
-            <SvgButton onClick={() => navigate('/lobby')} />
+            <SvgButton onClick={() => navigate('/soju')} />
             <SvgButton onClick={() => navigate('/lobby')} />
           </Flex>
 
