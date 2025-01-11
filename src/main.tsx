@@ -2,16 +2,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { ChakraProvider } from '@chakra-ui/react';
-import { BrowserRouter } from 'react-router-dom';
-import App from './App';
-// import './styles.css'; // 선택
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './App.tsx';
+import customTheme from './theme';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <ChakraProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <ChakraProvider theme={customTheme}>
+      <App />
     </ChakraProvider>
   </React.StrictMode>
 );
