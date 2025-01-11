@@ -1,10 +1,10 @@
-// client/src/App.tsx
+import { Flex, Text, VStack } from '@chakra-ui/react';
 import { useState } from 'react';
-import DiceGame from './components/DiceGame'; // (주사위 게임이 있다면)
 import MoleGame from './components/MoleGame';
 import MoleGameLobby from './components/MoleGameLobby';
+import SvgButton from './components/SvgButton';
 
-type GameMode = 'home' | 'dice' | 'moleLobby' | 'moleGame';
+type GameMode = 'home' | 'moleLobby' | 'moleGame';
 
 function App() {
   const [gameMode, setGameMode] = useState<GameMode>('home');
@@ -21,17 +21,42 @@ function App() {
   };
 
   return (
-    <div style={{ padding: 16 }}>
-      {gameMode === 'home' && (
-        <div>
-          <h1>멀티플레이 미니게임 플랫폼</h1>
-          <button onClick={() => setGameMode('dice')}>주사위 게임</button>
-          <button onClick={() => setGameMode('moleLobby')}>두더지 잡기</button>
-        </div>
-      )}
+    
 
-      {gameMode === 'dice' && (
-        <DiceGame onGoHome={() => setGameMode('home')} />
+    
+    <Flex direction="column" align="center" width="100%" pt="102px" bg="#ffffff" minWidth="100vw" minHeight="100vh">
+      <Text fontSize="34px" textAlign="center" fontWeight={700} fontFamily={'Noto Sans KR'}>
+            죽음의 술게임 ❤️
+          </Text>
+
+
+      {gameMode === 'home' && (
+        <VStack>
+          <VStack align="flex-start" width="full">
+            <Text fontSize="20px" mt="30px" textAlign="left" fontWeight={700} fontFamily={'Noto Sans KR'}>하나의 폰으로 다함께!</Text>
+                <Text fontSize="12px" fontWeight={250} mt={-3}>
+                  한 대의 폰으로 재밌는 게임을 시작할 수 있어요
+                </Text>
+
+            <Flex direction="row" gap="23px" mt="100px">
+              <SvgButton onClick={() => setGameMode('moleLobby')} />
+              <SvgButton onClick={() => setGameMode('moleLobby')} />
+            </Flex>
+
+
+
+              <Text fontSize="20px" mt="100px" textAlign="left" fontWeight={700} fontFamily={'Noto Sans KR'}>각자 폰으로 다함께!</Text>
+                <Text fontSize="12px" fontWeight={250} mt={-3}>
+                  최대 8대까지 동시에 접속할 수 있어요
+                </Text>
+                <Flex direction="row" gap="23px" mt="100px">
+              <SvgButton onClick={() => setGameMode('moleLobby')}   overlayImage="/cat.png"
+              overlayText="고양이 잡기"
+              overlaySubtext="장난꾸러기 고양이를 혼쭐내주세요!"  />
+              <SvgButton onClick={() => setGameMode('moleLobby')} />
+            </Flex>
+          </VStack>
+        </VStack>
       )}
 
       {gameMode === 'moleLobby' && (
@@ -45,7 +70,7 @@ function App() {
           onGoHome={() => setGameMode('home')}
         />
       )}
-    </div>
+    </Flex>
   );
 }
 
