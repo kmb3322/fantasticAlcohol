@@ -98,7 +98,7 @@ function MoleGameLobby({ onJoinedRoom }: MoleGameLobbyProps) {
         flexDirection="column"
         alignItems="center"
         textAlign="center"
-        mb="40px"
+        mb="70px"
       >
         <Image
           width="211px"
@@ -124,7 +124,7 @@ function MoleGameLobby({ onJoinedRoom }: MoleGameLobbyProps) {
       >
         <FormLabel
           mb="8px"
-          ml="-30px"
+          ml="-24px"
           fontWeight="bold"
           fontSize="15px"
           color="#333"
@@ -165,7 +165,7 @@ function MoleGameLobby({ onJoinedRoom }: MoleGameLobbyProps) {
             type="text"
             value={roomCode}
             onChange={(e) => setRoomCode(e.target.value)}
-            placeholder="방 코드를 입력"
+            placeholder="6자리 코드 입력하기"
             w="196px"
             h="37px"
             px="15px"
@@ -193,9 +193,10 @@ function MoleGameLobby({ onJoinedRoom }: MoleGameLobbyProps) {
       <Box
         display="flex"
         flexDirection="column"
-        mb="24px"
+        mt="40px"
         >
       <FormLabel
+          ml="-25px"
           mb="8px"
           fontWeight="bold"
           fontSize="15px"

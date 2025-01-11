@@ -1,9 +1,9 @@
 // server/controllers/moleGameController.js
 
 const MAX_PLAYERS = 8;
-const MIN_PLAYERS = 3;
-const GAME_DURATION = 20; // 초
-const BOARD_SIZE = 3;     // 3x3
+const MIN_PLAYERS = 2;
+const GAME_DURATION = 30; // 초
+const BOARD_SIZE = 5;     // 5x5
 
 // 방 목록 (roomCode -> 방 상태)
 const rooms = {};
@@ -29,6 +29,11 @@ function endGame(io, roomCode) {
   clearInterval(room.timerInterval);
   room.gameInProgress = false;
   room.currentMoleIndex = -1;
+
+
+    // ----- 추가된 부분: 두더지를 사라지게 만드는 이벤트
+  io.to(roomCode).emit('mole:hideMole');
+
 
   const sortedPlayers = Object.entries(room.players)
     .map(([sid, info]) => ({
