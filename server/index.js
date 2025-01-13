@@ -1,4 +1,3 @@
-// index.js
 require('dotenv').config();
 
 const express = require("express");
@@ -22,13 +21,16 @@ const upload = multer({
   }
 }).single('image');
 
-// CORS 설정
+// .env의 FRONTEND_URL 사용 및 추가 허용 도메인 설정
+const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
+const additionalOrigins = [
+  'http://localhost:5173', 
+  'https://51ef-2001-2d8-6a87-cd2e-8450-a2e1-9d1a-764e.ngrok-free.app'
+];
+
+// CORS 설정: FRONTEND_URL과 추가 도메인을 허용
 const corsOptions = {
-  origin: [
-    'http://localhost:5173', 
-    'https://fantastic-alcohol.vercel.app',
-    'https://51ef-2001-2d8-6a87-cd2e-8450-a2e1-9d1a-764e.ngrok-free.app'
-  ],
+  origin: [FRONTEND_URL, ...additionalOrigins],
   methods: ['GET', 'POST'],
   credentials: true,
   optionsSuccessStatus: 200,
@@ -170,7 +172,9 @@ const PORT = process.env.PORT || 3000;
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: '*',
+    origin: FRONTEND_URL,  // .env에 설정된 FRONTEND_URL 사용
+    methods: ['GET', 'POST'],
+    credentials: true,
   },
 });
 
