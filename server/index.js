@@ -28,7 +28,6 @@ const additionalOrigins = [
   'https://51ef-2001-2d8-6a87-cd2e-8450-a2e1-9d1a-764e.ngrok-free.app',
   'https://fantastic-alcohol.vercel.app', 
   'https://soju.monster'
-
 ];
 
 // CORS 설정: FRONTEND_URL과 추가 도메인을 허용
@@ -39,6 +38,13 @@ const corsOptions = {
   optionsSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
+
+app.use(express.json());
+
+// Health 체크 엔드포인트 추가
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
+});
 
 // Google Cloud Vision 클라이언트 초기화
 const client = new vision.ImageAnnotatorClient({
@@ -175,7 +181,7 @@ const PORT = process.env.PORT || 3000;
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: FRONTEND_URL,  // .env에 설정된 FRONTEND_URL 사용
+    origin: [FRONTEND_URL, ...additionalOrigins],
     methods: ['GET', 'POST'],
     credentials: true,
   },
