@@ -23,13 +23,14 @@ const upload = multer({
 }).single('image');
 
 // .env의 FRONTEND_URL 사용 및 추가 허용 도메인 설정
-const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
+const FRONTEND_URL = process.env.FRONTEND_URL || 'https://soju.monster';
 const additionalOrigins = [
+  'https://soju.monster'
   'http://localhost:5173', 
   'https://51ef-2001-2d8-6a87-cd2e-8450-a2e1-9d1a-764e.ngrok-free.app',
   'https://fantastic-alcohol.vercel.app', 
   'https://www.soju.monster',
-  'https://soju.monster'
+  
 ];
 
 // CORS 설정: FRONTEND_URL과 추가 도메인을 허용
