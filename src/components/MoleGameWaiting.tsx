@@ -1,4 +1,3 @@
-// src/components/MoleGameWaiting.tsx
 import {
   Box,
   Button,
@@ -9,50 +8,47 @@ import {
   useToast,
   VStack,
 } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { socket } from '../socket';
 
-// 채팅 메시지 형태
 interface IChatMessage {
   nickname: string;
   message: string;
 }
 
-// 컴포넌트 Props
 interface MoleGameWaitingProps {
   isHost: boolean;
   startGameError: string;
   onStartGame: () => void;
 }
 
-/**
- * 방장이 게임을 시작하기 전, 사람들을 기다리는 상태를 보여주고
- * 채팅 기능을 제공하는 컴포넌트
- */
 function MoleGameWaiting({ isHost, startGameError, onStartGame }: MoleGameWaitingProps) {
-  // 채팅 메시지 리스트
   const [chatMessages, setChatMessages] = useState<IChatMessage[]>([]);
-  // 현재 작성 중인 메시지
   const [message, setMessage] = useState('');
-
   const toast = useToast();
 
-  // 반응형 높이 값 예시 (모바일 / PC 환경 고려)
+  // 1) 채팅창에 대한 ref 생성
+  const chatBoxRef = useRef<HTMLDivElement | null>(null);
+
   const chatBoxHeight = useBreakpointValue({ base: '200px', md: '300px' });
 
-  // 소켓 이벤트 리스너 등록
   useEffect(() => {
-    // 서버에서 채팅 메시지를 받을 때
     const handleChatMessage = (data: IChatMessage) => {
       setChatMessages((prev) => [...prev, data]);
     };
-
     socket.on('mole:chatMessage', handleChatMessage);
 
     return () => {
       socket.off('mole:chatMessage', handleChatMessage);
     };
   }, []);
+
+  // 2) chatMessages가 변경될 때마다 자동 스크롤
+  useEffect(() => {
+    if (chatBoxRef.current) {
+      chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
+    }
+  }, [chatMessages]);
 
   // 메시지 전송
   const handleSendChat = () => {
@@ -65,9 +61,16 @@ function MoleGameWaiting({ isHost, startGameError, onStartGame }: MoleGameWaitin
       });
       return;
     }
-    // 서버로 메시지 emit
     socket.emit('mole:sendChatMessage', message);
     setMessage('');
+  };
+
+  // 3) 한글 입력 시 마지막 글자가 중복되지 않도록 isComposing 체크
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.nativeEvent.isComposing) return; // 조합 중이면 무시
+    if (e.key === 'Enter') {
+      handleSendChat();
+    }
   };
 
   return (
@@ -75,11 +78,11 @@ function MoleGameWaiting({ isHost, startGameError, onStartGame }: MoleGameWaitin
       spacing={4}
       align="stretch"
       w="full"
-      maxW="sm"       // 모바일 환경 고려하여 최대 너비 설정
+      maxW="sm"
       mx="auto"
       p={4}
     >
-      {/* 게임 시작 / 대기 안내 */}
+      {/* 게임 시작 버튼 */}
       {isHost ? (
         <Button colorScheme="teal" onClick={onStartGame} w="full">
           게임 시작
@@ -87,14 +90,16 @@ function MoleGameWaiting({ isHost, startGameError, onStartGame }: MoleGameWaitin
       ) : (
         <Text textAlign="center">방장이 시작하기를 기다리는 중...</Text>
       )}
+
       {/* 방장만 게임을 시작할 수 없을 때 에러 표시 */}
       {startGameError && <Text color="red.500">{startGameError}</Text>}
       <Text fontSize="sm" color="gray.500">
-        (최소 3명 이상 필요)
+        (최소 2명, 최대 8명이 함께 플레이 가능합니다.)
       </Text>
 
       {/* 채팅 메시지 표시 영역 */}
       <Box
+        ref={chatBoxRef}   // ref 연결
         borderWidth="1px"
         borderRadius="md"
         p={2}
@@ -117,7 +122,8 @@ function MoleGameWaiting({ isHost, startGameError, onStartGame }: MoleGameWaitin
           placeholder="메시지를 입력하세요..."
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          onKeyDown={(e) => e.key === 'Enter' && handleSendChat()}
+          // Enter 키 입력 시 IME 조합 중인지 체크
+          onKeyDown={handleKeyDown}
           flex="1"
         />
         <Button colorScheme="blue" onClick={handleSendChat}>
