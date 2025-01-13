@@ -1,10 +1,10 @@
 // src/components/Capture.tsx (추가 및 수정된 부분)
-import React, { useRef, useState } from "react";
-import { Box, Button, Text, VStack, background, useToast } from "@chakra-ui/react";
-import Webcam from "react-webcam";
-import { useNavigate } from "react-router-dom";
-import ResultModal from "./ResultModal";
+import { Box, Button, Text, VStack, useToast } from "@chakra-ui/react";
 import axios from "axios";
+import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Webcam from "react-webcam";
+import ResultModal from "./ResultModal";
 
 function SojuGame() {
   const navigate = useNavigate();
@@ -82,7 +82,7 @@ function SojuGame() {
         console.log('FormData 항목:', pair[0], pair[1]);
       }
 
-      const API_URL = 'http://localhost:5000';
+      const API_URL = 'http://localhost:4000';
       const analysisResponse = await axios.post(`${API_URL}/analyze`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',

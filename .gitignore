@@ -11,6 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
+package-lock.json
 
 # Editor directories and files
 .vscode/*
@@ -23,4 +24,5 @@ dist-ssr
 *.sln
 *.sw?
 .env
+server/omega-healer-447609-m2-172f1d71426c.json
 server/.env
