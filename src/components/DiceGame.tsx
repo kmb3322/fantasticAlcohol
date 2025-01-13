@@ -10,7 +10,8 @@ interface IUser {
   diceValue: number;
 }
 
-const socket: Socket = io('http://localhost:4000');
+const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000';
+const socket: Socket = io(backendUrl);
 
 type DiceGameProps = {
   onGoHome: () => void;

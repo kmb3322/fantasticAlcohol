@@ -26,6 +26,7 @@ const upload = multer({
 const corsOptions = {
   origin: [
     'http://localhost:5173', 
+    'https://fantastic-alcohol.vercel.app',
     'https://51ef-2001-2d8-6a87-cd2e-8450-a2e1-9d1a-764e.ngrok-free.app'
   ],
   methods: ['GET', 'POST'],
@@ -165,7 +166,7 @@ app.post('/analyze', (req, res) => {
 });
 
 // ----------- Socket.io 및 서버 생성 -----------
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3000;
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
@@ -204,5 +205,5 @@ setInterval(() => {
 
 // 서버 실행
 server.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });

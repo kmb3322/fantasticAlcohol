@@ -82,7 +82,7 @@ function SojuGame() {
         console.log('FormData 항목:', pair[0], pair[1]);
       }
 
-      const API_URL = 'http://localhost:4000';
+      const API_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000';
       const analysisResponse = await axios.post(`${API_URL}/analyze`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
