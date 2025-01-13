@@ -48,7 +48,7 @@ app.get('/health', (req, res) => {
 
 // Google Cloud Vision 클라이언트 초기화
 const client = new vision.ImageAnnotatorClient({
-  keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS // 예: "path/to/credentials.json"
+  keyFilename: './omega-healer-447609-m2-172f1d71426c.json'
 });
 
 // API 키 로깅(존재 여부만)
