@@ -26,3 +26,4 @@ package-lock.json
 .env
 server/omega-healer-447609-m2-172f1d71426c.json
 server/.env
+.vercel

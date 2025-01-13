@@ -1,5 +1,4 @@
-import React from "react";
-import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Button, Image, Text, Box } from "@chakra-ui/react";
+import { Box, Button, Image, Modal, ModalBody, ModalContent, ModalFooter, ModalOverlay, Text } from "@chakra-ui/react";
 
 interface ResultModalProps {
     isOpen: boolean;
@@ -12,7 +11,7 @@ interface ResultModalProps {
     onEnd: () => void;
 }
 
-function ResultModal({ isOpen, onClose, resultType, resultMessage, finalImage, targetVolume, onRetry, onEnd }: ResultModalProps) {
+function ResultModal({ isOpen, onClose, resultMessage, finalImage, targetVolume, onRetry, onEnd }: ResultModalProps) {
 
     const CANVAS_HEIGHT = 200;
     const MAX_VOLUME = 50;

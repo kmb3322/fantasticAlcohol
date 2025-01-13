@@ -22,18 +22,13 @@ function MoleGameLobby({ onJoinedRoom }: MoleGameLobbyProps) {
   const [userId, setUserId] = useState('');
   const [roomCode, setRoomCode] = useState('');
 
-  // 플레이어 목록(로비에서 확인용)
-  const [playerList, setPlayerList] = useState<any[]>([]);
+
 
   useEffect(() => {
     // 유저 ID 생성
     setUserId(generateRandomId());
 
-    // playerList 이벤트 수신
-    const handlePlayerList = (players: any[]) => {
-      setPlayerList(players);
-    };
-    socket.on('mole:playerList', handlePlayerList);
+  
 
     // joinError 수신
     const handleJoinError = (msg: string) => {
@@ -49,7 +44,6 @@ function MoleGameLobby({ onJoinedRoom }: MoleGameLobbyProps) {
     socket.on('mole:roomCreated', handleRoomCreated);
 
     return () => {
-      socket.off('mole:playerList', handlePlayerList);
       socket.off('joinError', handleJoinError);
       socket.off('mole:roomCreated', handleRoomCreated);
     };

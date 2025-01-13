@@ -130,10 +130,11 @@ function SojuGame() {
       setIsModalOpen(true);
 
     } catch (error) {
+      const err = error as any; 
       // alert(`에러 타입: ${error.name}\n에러 메시지: ${error.message}\n전체 에러: ${JSON.stringify(error)}`);
       console.log('상세 에러:', error);
       // 더 자세한 에러 정보 표시
-      const errorMessage = error.response?.data?.error || error.message;
+      const errorMessage = err.response?.data?.error || err.message;
       toast({
         title: "오류가 발생했습니다.",
         description: errorMessage,
