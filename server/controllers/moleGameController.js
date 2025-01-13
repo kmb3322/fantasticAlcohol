@@ -30,10 +30,8 @@ function endGame(io, roomCode) {
   room.gameInProgress = false;
   room.currentMoleIndex = -1;
 
-
-    // ----- 추가된 부분: 두더지를 사라지게 만드는 이벤트
+  // ----- 추가된 부분: 두더지를 사라지게 만드는 이벤트
   io.to(roomCode).emit('mole:hideMole');
-
 
   const sortedPlayers = Object.entries(room.players)
     .map(([sid, info]) => ({
