@@ -27,7 +27,7 @@ const additionalOrigins = [
   'http://localhost:5173', 
   'https://51ef-2001-2d8-6a87-cd2e-8450-a2e1-9d1a-764e.ngrok-free.app',
   'https://fantastic-alcohol.vercel.app', 
-  'https://soju.monster'
+  'https://www.soju.monster'
 ];
 
 // CORS 설정: FRONTEND_URL과 추가 도메인을 허용
