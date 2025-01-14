@@ -223,7 +223,7 @@ function MoleGame({ roomCode, isHost, onGoHome }: MoleGameProps) {
                       }
                       onClick={() => handleMoleClick(idx)}
                       // exit 완료 후 clickedMoleIndex 초기화
-                      onAnimationComplete={(definition) => {
+                      onAnimationComplete={() => {
                         // definition === "exit" 라는 표시도 가능하지만
                         // 간단히 clickedMoleIndex를 풀어주는 방식
                         if (moleIndex !== idx) {

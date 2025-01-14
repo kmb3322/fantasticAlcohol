@@ -1,4 +1,3 @@
-// index.js
 require('dotenv').config();
 
 const express = require("express");
@@ -12,31 +11,44 @@ const { Server } = require('socket.io');
 // controllers
 const { handleMoleGameConnection, rooms } = require('./controllers/moleGameController');
 
-// ----------- Express 앱, 이미지 업로드 및 Vision API 설정 -----------
 const app = express();
 
-// 업로드 설정 (multer)
-const upload = multer({
-  limits: {
-    fileSize: 5 * 1024 * 1024, // 5MB
-  }
-}).single('image');
-
 // CORS 설정
+const FRONTEND_URL = process.env.FRONTEND_URL || 'https://soju.monster';
+const additionalOrigins = [
+  'https://soju.monster',
+  'http://localhost:5173', 
+  'https://51ef-2001-2d8-6a87-cd2e-8450-a2e1-9d1a-764e.ngrok-free.app',
+  'https://fantastic-alcohol.vercel.app', 
+  'https://www.soju.monster'
+];
 const corsOptions = {
-  origin: [
-    'http://localhost:5173', 
-    'https://51ef-2001-2d8-6a87-cd2e-8450-a2e1-9d1a-764e.ngrok-free.app'
-  ],
-  methods: ['GET', 'POST'],
-  credentials: true,
-  optionsSuccessStatus: 200,
+  origin: function(origin, callback) {
+    // 요청 출처가 허용 목록에 있거나, 요청 출처가 undefined (예: 서버 간 호출)인 경우 허용
+    if (!origin || additionalOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('CORS 정책에 의해 차단됨'));
+    }
+  },
+  methods: ['GET', 'POST', 'OPTIONS'],
+  credentials: true, // 자격 증명 허용
+  optionsSuccessStatus: 200
 };
+
 app.use(cors(corsOptions));
+
+
+app.use(express.json());
+
+// Health 체크 엔드포인트 추가
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
+});
 
 // Google Cloud Vision 클라이언트 초기화
 const client = new vision.ImageAnnotatorClient({
-  keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS // 예: "path/to/credentials.json"
+  keyFilename: './omega-healer-447609-m2-172f1d71426c.json'
 });
 
 // API 키 로깅(존재 여부만)
@@ -165,44 +177,52 @@ app.post('/analyze', (req, res) => {
 });
 
 // ----------- Socket.io 및 서버 생성 -----------
-const PORT = process.env.PORT || 4000;
+// Socket 서버
+const PORT = process.env.PORT || 3000;
 const server = http.createServer(app);
+
 const io = new Server(server, {
   cors: {
-    origin: '*',
+    origin: function(origin, callback) {
+      if (!origin || additionalOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    methods: ['GET', 'POST'],
+    credentials: true,
   },
+  transports: ['websocket', 'polling'],
 });
-
 // 소켓 연결
 io.on('connection', (socket) => {
   console.log('New client connected:', socket.id);
 
   // 두더지 게임 소켓 로직
   handleMoleGameConnection(socket, io);
-  // (추가 게임: 주사위 게임 등 있다면 이곳에 handleDiceGameConnection(socket, io) 등 추가)
 });
 
 // 3분 이상 활동 없는 유저 자동 제거
-const CLEANUP_INTERVAL = 30 * 1000; // 30초 간격으로 확인
+const CLEANUP_INTERVAL = 30 * 1000; // 30초 간격
 const INACTIVE_THRESHOLD = 3 * 60 * 1000; // 3분
 
 setInterval(() => {
   const now = Date.now();
   Object.keys(rooms).forEach((roomCode) => {
     const room = rooms[roomCode];
-    Object.entries(room.players).forEach(([sid, player]) => {
+    Object.keys(room.players).forEach((userId) => {
+      const player = room.players[userId];
       if (now - player.lastActivityAt > INACTIVE_THRESHOLD) {
-        delete room.players[sid];
+        delete room.players[userId];
       }
     });
-    // 인원 0명이면 방 삭제
     if (Object.keys(room.players).length === 0) {
       delete rooms[roomCode];
     }
   });
 }, CLEANUP_INTERVAL);
 
-// 서버 실행
 server.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });

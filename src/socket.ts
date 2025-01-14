@@ -2,4 +2,11 @@
 import { io } from 'socket.io-client';
 
 // 서버 주소 맞게 설정
-export const socket = io('http://localhost:4000');
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'https://sojubackend.monster';
+export const socket = io(BACKEND_URL, {
+    withCredentials: true,
+    extraHeaders: {
+      'Access-Control-Allow-Origin': 'https://soju.monster, https://www.soju.monster'
+  },
+
+  });
