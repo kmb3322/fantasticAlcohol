@@ -13,15 +13,13 @@ const { handleMoleGameConnection, rooms } = require('./controllers/moleGameContr
 
 const app = express();
 
-// CORS 설정
-const FRONTEND_URL = process.env.FRONTEND_URL || 'https://soju.monster';
-const additionalOrigins = [
+const FRONTEND_URLS = [
   'https://soju.monster',
-  'http://localhost:5173', 
-  'https://51ef-2001-2d8-6a87-cd2e-8450-a2e1-9d1a-764e.ngrok-free.app',
-  'https://fantastic-alcohol.vercel.app', 
-  'https://www.soju.monster'
+  'https://www.soju.monster',
+  'http://localhost:5173'
 ];
+
+
 const corsOptions = {
   origin: FRONTEND_URLS,
   methods: ['GET', 'POST', 'OPTIONS'],
@@ -180,11 +178,6 @@ app.post('/analyze', (req, res) => {
 const PORT = process.env.PORT || 3000;
 const server = http.createServer(app);
 
-const FRONTEND_URLS = [
-  'https://soju.monster',
-  'https://www.soju.monster',
-  'http://localhost:5173'
-];
 
 const io = new Server(server, {
   cors: {
