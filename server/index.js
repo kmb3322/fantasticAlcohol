@@ -17,13 +17,13 @@ const app = express();
 const FRONTEND_URL = process.env.FRONTEND_URL || 'https://soju.monster';
 const additionalOrigins = [
   'https://soju.monster',
-  'http://localhost:5173', 
-  'https://51ef-2001-2d8-6a87-cd2e-8450-a2e1-9d1a-764e.ngrok-free.app',
-  'https://fantastic-alcohol.vercel.app', 
+  'http://localhost:5173',
+  // 'https://51ef-2001-2d8-6a87-cd2e-8450-a2e1-9d1a-764e.ngrok-free.app',
+  'https://fantastic-alcohol.vercel.app',
   'https://www.soju.monster'
 ];
 const corsOptions = {
-  origin: function(origin, callback) {
+  origin: function (origin, callback) {
     // 요청 출처가 허용 목록에 있거나, 요청 출처가 undefined (예: 서버 간 호출)인 경우 허용
     if (!origin || additionalOrigins.indexOf(origin) !== -1) {
       callback(null, true);
@@ -53,6 +53,14 @@ const client = new vision.ImageAnnotatorClient({
 
 // API 키 로깅(존재 여부만)
 console.log('API Key 존재 여부:', !!process.env.OPENAI_API_KEY);
+
+// Multer 설정 추가
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: {
+    fileSize: 5 * 1024 * 1024 // 5MB 제한
+  }
+}).single('image');
 
 // ----------- /analyze 라우트 - Vision API & OpenAI 호출 -----------
 app.post('/analyze', (req, res) => {
@@ -183,7 +191,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: function(origin, callback) {
+    origin: function (origin, callback) {
       if (!origin || additionalOrigins.indexOf(origin) !== -1) {
         callback(null, true);
       } else {
