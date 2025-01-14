@@ -63,6 +63,12 @@ import { socket } from '../socket';
           ...prev,
           [socketId]: { ...prev[socketId], popped: true }
         }));
+        toast({
+            title: `${nickname}의 풍선이 터졌습니다!`,
+            status: 'info',
+            isClosable: true,
+            duration: 2000,
+          });
         // 추가적인 팝업 또는 UI 효과 처리 가능
       };
       socket.on('balloon:popped', handlePopped);

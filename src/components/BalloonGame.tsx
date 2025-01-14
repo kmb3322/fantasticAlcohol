@@ -22,6 +22,8 @@ interface IPlayer {
   balloonSize: number;
   popped?: boolean;
   popTime?: number | null;
+  popOrder?: number | null;  // 추가: 풍선이 터진 순서
+
 }
 
 type BalloonGameProps = {
