@@ -1,13 +1,8 @@
-// client/src/socket.ts
-import { io } from 'socket.io-client';
-
-// 서버 주소 맞게 설정
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'https://thisis.sojubackend.monster';
-export const socket = io(BACKEND_URL, {
-    withCredentials: true,
-    extraHeaders: {
-      'Access-Control-Allow-Origin': 'https://soju.monster, https://www.soju.monster'
+const socket = io(BACKEND_URL, {
+  withCredentials: true,
+  transports: ['polling', 'websocket'], // polling을 첫 번째로 시도
+  extraHeaders: {
+    'Access-Control-Allow-Origin': 'https://soju.monster, https://www.soju.monster'
   },
-  transports: ['websocket'], // WebSocket 강제 사용
-
-  });
+  upgrade: true, // 웹소켓으로 업그레이드 허용
+});
