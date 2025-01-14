@@ -1,7 +1,7 @@
+import { Box, Button, FormLabel, Image, Select, Text } from '@chakra-ui/react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRouletteContext } from '../context/RouletteContext';
-import { Box, Button, Image, Select, Text, VStack, FormLabel } from '@chakra-ui/react';
 
 const RouletteGameLobby: React.FC = () => {
   const navigate = useNavigate();

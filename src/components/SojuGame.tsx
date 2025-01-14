@@ -1,5 +1,5 @@
 // src/components/Capture.tsx
-import { Box, Button, Text, Image, useToast, useBreakpointValue, VStack } from "@chakra-ui/react";
+import { Box, Button, Image, Text, useBreakpointValue, useToast } from "@chakra-ui/react";
 import axios from "axios";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
