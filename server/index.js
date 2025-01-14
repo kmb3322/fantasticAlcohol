@@ -23,12 +23,20 @@ const additionalOrigins = [
   'https://www.soju.monster'
 ];
 const corsOptions = {
-  origin: [FRONTEND_URL, ...additionalOrigins],
+  origin: function (origin, callback) {
+    const allowedOrigins = [FRONTEND_URL, ...additionalOrigins];
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ['GET', 'POST', 'OPTIONS'],
-  credentials: true,
-  optionsSuccessStatus: 200,
+  credentials: true, // 쿠키 허용
+  optionsSuccessStatus: 200, // Safari 호환성
 };
 app.use(cors(corsOptions));
+
 
 app.use(express.json());
 
@@ -174,11 +182,18 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: [FRONTEND_URL, ...additionalOrigins],
+    origin: function (origin, callback) {
+      const allowedOrigins = [FRONTEND_URL, ...additionalOrigins];
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     methods: ['GET', 'POST'],
-    credentials: true,
+    credentials: true, // 인증 정보 허용
   },
-  // transport나 다른 설정 필요하면 추가
+  transports: ['websocket', 'polling'], // Transport 설정
 });
 
 // 소켓 연결

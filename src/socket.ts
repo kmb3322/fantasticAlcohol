@@ -7,5 +7,7 @@ export const socket = io(BACKEND_URL, {
     withCredentials: true,
     extraHeaders: {
       'Access-Control-Allow-Origin': 'https://soju.monster, https://www.soju.monster'
-  }
+  },
+  transports: ['websocket'], // WebSocket 강제 사용
+
   });
