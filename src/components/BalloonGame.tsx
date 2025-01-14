@@ -110,7 +110,7 @@ function BalloonGame({ roomCode, isHost, onGoHome }: BalloonGameProps) {
         onClick={handleGoHome} 
         colorScheme="teal" 
         variant="outline" 
-        ml={-10} 
+        ml={-4} 
         mb={10}
       >
         ← 메인으로

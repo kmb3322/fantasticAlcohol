@@ -4,10 +4,10 @@ import { FC } from 'react';
 
 interface SvgButtonProps {
   onClick: () => void;
-  overlayImage?: string;  // 추가: 오버레이 이미지 URL
+  overlayImage?: string;
   overlayText?: string;
   overlaySubtext?: string;
-  textColor?: string;  // 추가: 텍스트 색상 prop
+  textColor?: string;
 }
 
 const SvgButton: FC<SvgButtonProps> = ({ onClick,
@@ -26,7 +26,7 @@ const SvgButton: FC<SvgButtonProps> = ({ onClick,
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="173"
+          width="150"
           height="232"
           viewBox="0 0 173 232"
           fill="none"
@@ -75,7 +75,6 @@ const SvgButton: FC<SvgButtonProps> = ({ onClick,
         </svg>
       </Button>
 
-      {/* overlayImage가 있을 경우 렌더링 */}
       {overlayImage && (
         <Image
           src={overlayImage}
@@ -86,10 +85,10 @@ const SvgButton: FC<SvgButtonProps> = ({ onClick,
           width="100%"
           height="100%"
           objectFit="contain"
-          pointerEvents="none"  // 버튼 클릭 방해 안하도록
+          pointerEvents="none"
         />
       )}
-      {/* Overlay 텍스트와 서브텍스트 */}
+
       {(overlayText || overlaySubtext) && (
         <Box
           position="absolute"
@@ -99,10 +98,10 @@ const SvgButton: FC<SvgButtonProps> = ({ onClick,
           transform="translate(-50%, -50%)"
           textAlign="center"
           pointerEvents="none"
-
         >
           {overlayText && (
-            <Text fontSize="14px"
+            <Text
+              fontSize="14px"
               textColor={textColor || "#14ACA4"}
               fontWeight={700}
               mt="5px"
@@ -112,14 +111,12 @@ const SvgButton: FC<SvgButtonProps> = ({ onClick,
             </Text>
           )}
           {overlaySubtext && (
-            <Text fontSize="8px" fontFamily={'Noto Sans KR'} fontWeight={250} >
+            <Text fontSize="8px" fontFamily={'Noto Sans KR'} fontWeight={250}>
               {overlaySubtext}
             </Text>
           )}
         </Box>
       )}
-
-
     </Box>
   );
 };

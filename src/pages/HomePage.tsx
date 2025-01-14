@@ -7,7 +7,7 @@ function HomePage() {
   const navigate = useNavigate();
 
   return (
-    <Flex direction="column" align="center" width="100%" pt="72px" bg="#ffffff" minWidth="100vw" minHeight="100vh">
+    <Flex direction="column" align="center" width="100%"  pt="72px" bg="#ffffff" minWidth="100vw" minHeight="100vh">
       <Text fontSize="34px" textAlign="center" fontWeight={700} fontFamily={'Noto Sans KR'} mb={-2}>
         죽음의 술게임 ❤️
       </Text>
