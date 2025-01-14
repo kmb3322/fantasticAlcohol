@@ -23,9 +23,16 @@ const additionalOrigins = [
   'https://www.soju.monster'
 ];
 const corsOptions = {
-  origin: '*', // 모든 도메인 허용
+  origin: function(origin, callback) {
+    // 요청 출처가 허용 목록에 있거나, 요청 출처가 undefined (예: 서버 간 호출)인 경우 허용
+    if (!origin || additionalOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('CORS 정책에 의해 차단됨'));
+    }
+  },
   methods: ['GET', 'POST', 'OPTIONS'],
-  credentials: true,
+  credentials: true, // 자격 증명 허용
   optionsSuccessStatus: 200
 };
 
@@ -176,13 +183,18 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: '*', // 모든 도메인 허용
+    origin: function(origin, callback) {
+      if (!origin || additionalOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     methods: ['GET', 'POST'],
     credentials: true,
   },
   transports: ['websocket', 'polling'],
 });
-
 // 소켓 연결
 io.on('connection', (socket) => {
   console.log('New client connected:', socket.id);
