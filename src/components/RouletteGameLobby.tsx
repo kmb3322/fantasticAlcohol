@@ -75,7 +75,7 @@ const RouletteGameLobby: React.FC = () => {
           onChange={(e) => setRouletteType(e.target.value as '당첨 룰렛' | '비율 룰렛')}
         >
           <option value="당첨 룰렛">당첨 룰렛</option>
-          <option value="비율 룰렛">사다리타기</option>
+          <option value="비율 룰렛">러시안 룰렛</option>
         </Select>
       </Box>
       <Box

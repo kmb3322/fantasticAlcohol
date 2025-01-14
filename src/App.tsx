@@ -8,6 +8,8 @@ import { RouletteProvider } from './context/RouletteContext';
 import GamePage from './pages/GamePage';
 import HomePage from './pages/HomePage';
 import LobbyPage from './pages/LobbyPage';
+import DrinkGameLobby from './components/DrinkGameLobby';
+import BeerGame from './components/BeerGame';
 
 function App() {
   return (
@@ -16,7 +18,9 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/intro" element={<VideoIntro />} />
-          <Route path="/soju" element={<SojuGame />} />
+          <Route path="/drink" element={<DrinkGameLobby />} />
+          <Route path="/drink/soju" element={<SojuGame />} />
+          <Route path="/drink/beer" element={<BeerGame />} />
           <Route path="/lobby" element={<LobbyPage />} />
           <Route path="/game" element={<GamePage />} />
           <Route path="/random" element={<RouletteGameLobby />} />

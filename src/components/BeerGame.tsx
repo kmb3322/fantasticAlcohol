@@ -1,37 +1,36 @@
-// src/components/Capture.tsx
 import { Box, Button, Text, Image, useToast, useBreakpointValue } from "@chakra-ui/react";
 import axios from "axios";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Webcam from "react-webcam";
 import ResultModal from "./ResultModal";
-import SojuGlass from "./SojuGlass"; // 새로 추가된 컴포넌트
+import BeerGlass from "./BeerGlass"; // 맥주잔 가이드라인 컴포넌트
 
-function SojuGame() {
+function BeerGame() {
   const navigate = useNavigate();
   const toast = useToast();
   const webcamRef = useRef<Webcam>(null);
 
-  // 20mL에서 50mL 사이의 랜덤한 목표 용량 설정
+  // 100mL에서 225mL 사이의 랜덤한 목표 용량 설정
   const [targetVolume] = useState(() => {
-    return Math.floor(Math.random() * (50 - 20 + 1)) + 20;
+    return Math.floor(Math.random() * (225 - 100 + 1)) + 100;
   });
 
-  // 결과 모달 관련 상태
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [resultType, setResultType] = useState<"less" | "more" | 'exact' | null>(null);
-  const [resultMessage, setResultMessage] = useState<string>("");
-  const [capturedImage, setCapturedImage] = useState<string>(""); // 팝업에 띄울 사진
-  const [predictedVolume, setPredictedVolume] = useState<number | null>(null); // 서버에서 받은 예측 용량
+ // 결과 모달 관련 상태
+ const [isModalOpen, setIsModalOpen] = useState(false);
+ const [resultType, setResultType] = useState<"less" | "more" | 'exact' | null>(null);
+ const [resultMessage, setResultMessage] = useState<string>("");
+ const [capturedImage, setCapturedImage] = useState<string>(""); // 팝업에 띄울 사진
+ const [predictedVolume, setPredictedVolume] = useState<number | null>(null); // 서버에서 받은 예측 용량
 
-  // 반응형 가이드라인 비율 설정
-  const GUIDE_X_PERCENT = useBreakpointValue({ base: 20, md: 18.75 }); // 모바일과 데스크탑에서 다르게 설정
-  const GUIDE_Y_PERCENT = useBreakpointValue({ base: 20, md: 20 });
-  const GUIDE_W_PERCENT = useBreakpointValue({ base: 60, md: 50 });
-  const GUIDE_H_PERCENT = useBreakpointValue({ base: 60, md: 60 });
+ // 반응형 가이드라인 비율 설정
+ const GUIDE_X_PERCENT = useBreakpointValue({ base: 20, md: 18.75 }); // 모바일과 데스크탑에서 다르게 설정
+ const GUIDE_Y_PERCENT = useBreakpointValue({ base: 20, md: 20 });
+ const GUIDE_W_PERCENT = useBreakpointValue({ base: 60, md: 50 });
+ const GUIDE_H_PERCENT = useBreakpointValue({ base: 60, md: 60 });
 
-  // 사진찍기 & 분석
-  const handleCapture = async () => {
+ // 사진찍기 & 분석
+ const handleCapture = async () => {
     if (!webcamRef.current) return;
 
     try {
@@ -110,8 +109,8 @@ function SojuGame() {
       // 소주잔이 감지되지 않은 경우
       if (!glassDetected) {
         toast({
-          title: "소주잔을 찾을 수 없습니다",
-          description: "가이드라인에 맞춰 소주잔을 위치시켜주세요",
+          title: "맥주잔을 찾을 수 없습니다",
+          description: "가이드라인에 맞춰 맥주잔을 위치시켜주세요",
           status: "warning",
           duration: 3000,
           isClosable: true
@@ -170,6 +169,7 @@ function SojuGame() {
     navigate("/");
   };
 
+
   return (
     <Box
       w="100%"
@@ -197,13 +197,13 @@ function SojuGame() {
           objectFit="contain"
           mb="2px"
           src="/soju.png"
-          alt="soju logo"
+          alt="beer logo"
         />
         <Text fontWeight={700} fontSize="28px" opacity={0.8} mb="-2px">
-          소주잔 용량 맞추기
+          맥주잔 용량 맞추기
         </Text>
         <Text fontSize="14px" color="#666" textAlign="center">
-          목표 용량에 맞게 예측하여 각자 술을 따른 후<br />가이드라인에 소주잔을 맞춰 사진을 찍어주세요!
+          목표 용량에 맞게 예측하여 각자 술을 따른 후<br />가이드라인에 맥주잔을 맞춰 사진을 찍어주세요!
         </Text>
       </Box>
       <Box
@@ -216,15 +216,15 @@ function SojuGame() {
         </Text>
       </Box>
 
-      {/* 카메라 영역 + 소주잔 SVG 가이드 */}
+      {/* 카메라 영역 + 맥주잔 SVG 가이드 */}
       <Box
         position="relative"
-        width={["80vw", "240px"]} // 모바일에서는 화면 너비의 80%, 데스크탑에서는 240px
-        aspectRatio="3 / 4" // 세로로 긴 비율 유지
+        width={["80vw", "240px"]}
+        aspectRatio="3 / 4"
         bg="gray.200"
         maxW="240px"
         w="100%"
-        overflow="hidden" // 이미지가 넘치지 않도록 설정
+        overflow="hidden"
         borderRadius="md"
         boxShadow="md"
         mb="70px"
@@ -236,7 +236,7 @@ function SojuGame() {
           videoConstraints={{
             facingMode: 'environment',
             aspectRatio: 3 / 4,
-            width: 480, // 해상도 조정
+            width: 480,
             height: 640,
           }}
           style={{
@@ -245,12 +245,12 @@ function SojuGame() {
             left: 0,
             width: '100%',
             height: '100%',
-            objectFit: 'cover', // 'cover'로 설정하여 가이드라인 영역을 충분히 채우도록 함
+            objectFit: 'cover',
           }}
         />
 
-        {/* 소주잔 SVG 가이드 */}
-        <SojuGlass />
+        {/* 맥주잔 SVG 가이드 */}
+        <BeerGlass />
       </Box>
 
       <Button
@@ -272,7 +272,7 @@ function SojuGame() {
         onClose={() => setIsModalOpen(false)}
         resultMessage={resultMessage}
         finalImage={capturedImage}
-        predictedVolume={predictedVolume} // 새로 추가된 prop
+        predictedVolume={predictedVolume}
         onRetry={handleRetry}
         onEnd={handleEnd}
       />
@@ -280,4 +280,4 @@ function SojuGame() {
   );
 }
 
-export default SojuGame;
+export default BeerGame;
