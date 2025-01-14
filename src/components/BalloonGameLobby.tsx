@@ -66,7 +66,7 @@ function BalloonGameLobby({ onJoinedRoom }: BalloonGameLobbyProps) {
     <Box
       w="100%"
       minH="100vh"
-      bg="#f9f9f9"
+      bg="#f5f5f5"
       display="flex"
       flexDirection="column"
       alignItems="center"

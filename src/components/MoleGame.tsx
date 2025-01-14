@@ -82,7 +82,7 @@ function MoleGame({ roomCode, isHost, onGoHome }: MoleGameProps) {
 
     const handleShowMole = (index: number) => {
       setMoleIndex(index);
-      setClickedMoleIndex(null); // 새 두더지 등장시, 클릭 기록 초기화
+      setClickedMoleIndex(null);
     };
     socket.on('mole:showMole', handleShowMole);
 
@@ -107,11 +107,8 @@ function MoleGame({ roomCode, isHost, onGoHome }: MoleGameProps) {
     };
     socket.on('mole:gameEnded', handleGameEnded);
 
-    // 누군가가 클릭해서 두더지가 사라져야 할 때(내가 클릭하지 않았어도)
     const handleHideMole = () => {
       setMoleIndex(-1);
-      // clickedMoleIndex는 그대로 두거나, null로 초기화해도 되지만
-      // 어차피 새 두더지 등장시 초기화할 거므로 여기서도 null 처리
       setClickedMoleIndex(null);
     };
     socket.on('mole:hideMole', handleHideMole);
@@ -129,28 +126,76 @@ function MoleGame({ roomCode, isHost, onGoHome }: MoleGameProps) {
     };
   }, [toast]);
 
-  // 방장만 게임 시작 가능
   const handleStartGame = () => {
     socket.emit('mole:startGame');
   };
 
-  // 두더지 클릭
   const handleMoleClick = (index: number) => {
-    // 내가 클릭한 moleIndex 기록
     setClickedMoleIndex(index);
-    // 서버에 알림
     socket.emit('mole:hitMole', index);
   };
 
   return (
-    <Box p={5} bg="gray.50" minH="100vh">
-      <Button onClick={onGoHome} colorScheme="teal" variant="outline" mb={3}>
+    <Box p={5} bg="#f5f5f5" minH="100vh">
+      <Button 
+        onClick={onGoHome} 
+        colorScheme="teal" 
+        variant="outline" 
+        ml={-10} 
+        mb={10}
+      >
         ← 메인으로
       </Button>
 
-      <VStack align="start" spacing={3}>
-        <Heading size="md">고양이 잡기 (방 코드: {roomCode})</Heading>
-        <Text>현재 접속자: {playerList.length}명</Text>
+      <VStack align="center" spacing={3}>
+        <Image
+          width="211px"
+          height="94px"
+          objectFit="contain"
+          mb="2px"
+          src="/cat.png"
+          alt="cat logo"
+        />
+        <Text fontWeight={700} fontSize="28px" opacity={0.8} mb="-2px">
+          고양이 잡기
+        </Text>
+
+        {/* gameStarted일 때 '잡은 고양이 수' 표시 */}
+        {gameStarted && (
+          <>
+            <Text fontSize={20} fontWeight={700} mt={5} mb={1}>
+              잡은 고양이 수
+            </Text>
+            <VStack align="center" spacing={1}>
+              {playerList.map((p) => (
+                <Text as="span" key={p.socketId}>
+                  <Box as="span" fontWeight={700}>{p.nickname}</Box> : {p.score}마리
+                </Text>
+              ))}
+            </VStack>
+          </>
+        )}
+
+        {/* 게임 시작 전일 때 방 코드와 접속자 수 표시 */}
+        {!gameStarted && (
+          <>
+            <Text fontSize="sm" mt={-2} color="gray.500">
+              최소 2명, 최대 8명이 함께 플레이 가능합니다.
+            </Text>
+            <Text fontSize={16} color="gray.500" mt={5} mb={-5}>
+              방 코드
+            </Text>
+            <Text fontSize="38px" fontWeight={700} color="#14ACA4" mb={-3}>
+              {roomCode}
+            </Text>
+            <Text fontSize={16} color="gray.500" mt={5} mb={-5}>
+              접속자
+            </Text>
+            <Text fontSize="38px" fontWeight={700} color="#14ACA4">
+              {playerList.length}명
+            </Text>
+          </>
+        )}
       </VStack>
 
       <Divider my={4} />
@@ -166,7 +211,6 @@ function MoleGame({ roomCode, isHost, onGoHome }: MoleGameProps) {
           <Heading size="sm" mb={4}>
             게임 진행 중! 남은 시간: {timeLeft}s
           </Heading>
-          {/* 3x3 보드 */}
           <Grid
             templateColumns={`repeat(${BOARD_SIZE}, 50px)`}
             gap={6}
@@ -183,16 +227,14 @@ function MoleGame({ roomCode, isHost, onGoHome }: MoleGameProps) {
                 boxShadow="inset 0 0 15px rgba(0, 0, 0, 0.5)"
                 overflow="hidden"
               >
-                {/* AnimatePresence: moleIndex가 idx일 때만 두더지 */}
                 <AnimatePresence mode="sync">
                   {moleIndex === idx && (
                     <MotionBox
                       key={`mole-${idx}`}
                       position="absolute"
-                      bottom="0"    // 구멍 하단에 두더지 위치
+                      bottom="0"
                       left="0%"
-                      transform="translateX(-50%)" // 수평 중앙 정렬
-                      // 초기 (두더지가 땅속에서 작게 등장)
+                      transform="translateX(-50%)"
                       initial={{ y: 50, scale: 0, opacity: 0 }}
                       animate={{
                         y: 0,
@@ -204,9 +246,6 @@ function MoleGame({ roomCode, isHost, onGoHome }: MoleGameProps) {
                           bounce: 0.4,
                         },
                       }}
-                      // exit 애니메이션 분기:
-                      // - 클릭한 두더지이면: 위로 "뽑히듯" 사라짐
-                      // - 아니면: 아래로 or 작게 사라짐
                       exit={
                         clickedMoleIndex === idx
                           ? {
@@ -223,12 +262,8 @@ function MoleGame({ roomCode, isHost, onGoHome }: MoleGameProps) {
                             }
                       }
                       onClick={() => handleMoleClick(idx)}
-                      // exit 완료 후 clickedMoleIndex 초기화
                       onAnimationComplete={() => {
-                        // definition === "exit" 라는 표시도 가능하지만
-                        // 간단히 clickedMoleIndex를 풀어주는 방식
                         if (moleIndex !== idx) {
-                          // 현재 구멍의 mole가 더 이상 아니면 사라진 것이므로 초기화
                           setClickedMoleIndex(null);
                         }
                       }}
@@ -252,16 +287,7 @@ function MoleGame({ roomCode, isHost, onGoHome }: MoleGameProps) {
 
       <Divider my={4} />
 
-      <Heading size="sm" mb={2}>
-        점수판
-      </Heading>
-      <VStack align="start">
-        {playerList.map((p) => (
-          <Text key={p.socketId}>
-            {p.nickname} : {p.score}점
-          </Text>
-        ))}
-      </VStack>
+    
 
       {gameResult && (
         <Box mt={5}>
@@ -271,12 +297,13 @@ function MoleGame({ roomCode, isHost, onGoHome }: MoleGameProps) {
           <OrderedList>
             {gameResult.map((p, i) => (
               <ListItem key={p.socketId}>
-                {i + 1}등 - {p.nickname} ({p.score}점)
+                {i + 1}등 - <Box as="span" fontWeight={700}>{p.nickname}</Box> ({p.score}점)
               </ListItem>
             ))}
           </OrderedList>
         </Box>
       )}
+
     </Box>
   );
 }

@@ -17,7 +17,7 @@ function GamePage() {
   };
 
   return (
-    <Flex direction="column" align="center" width="100%" pt="102px" bg="#ffffff" minWidth="100vw" minHeight="100vh">
+    <Flex direction="column" align="center" width="100%" height="100%" bg="#f5f5f5" minWidth="100vw" minHeight="100vh">
       <MoleGame roomCode={roomCode} isHost={isHost} onGoHome={handleGoHome} />
     </Flex>
   );
