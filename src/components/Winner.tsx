@@ -105,6 +105,9 @@ const Winner: React.FC = () => {
   return (
     <Box textAlign="center" mt={10}>
       <Text fontSize="2xl" fontWeight="bold" mb={4}>당첨 룰렛</Text>
+      <Text fontSize="14px" color="#666" textAlign="center">
+      나만 아니면 돼~! 과연 오늘의 주인공은?<br/>룰렛판에 각자의 이름을 적어주세요
+        </Text>
 
       {/* 룰렛 표시 */}
       <Box display="inline-block" mb={4}>
@@ -113,7 +116,7 @@ const Winner: React.FC = () => {
           prizeNumber={prizeNumber}
           data={segments}
           onStopSpinning={handleStopSpin}
-          backgroundColors={['#fabc09', '#f3f3f3']}
+          backgroundColors={['#FFD5BA', '#F19C7A', '#6E6464', '#87C6BC', '#C5EDE2']}
           textColors={['#ffffff']}
         />
       </Box>
@@ -133,8 +136,12 @@ const Winner: React.FC = () => {
       </Box>
 
       {!result && (
-        <Button colorScheme="teal" onClick={handleStart}>
-          시작하기
+        <Button bg="#F19C7A"
+          color="white"
+          _hover={{ bg: "#e58c63" }}
+          _active={{ bg: "#d16f46" }} 
+          onClick={handleStart}>
+          돌리기
         </Button>
       )}
 

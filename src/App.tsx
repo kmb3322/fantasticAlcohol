@@ -5,10 +5,10 @@ import GamePage from './pages/GamePage';
 import HomePage from './pages/HomePage';
 import LobbyPage from './pages/LobbyPage';
 import SojuGame from './components/SojuGame';
-import RouletteGameLobby from './components/RouletteGameLobby';
+import RandomGameLobby from './components/RandomGameLobby';
 import Winner from './components/Winner';
-import Ratio from './components/Ratio';
 import { RouletteProvider } from './context/RouletteContext';
+import Ladder from './components/Ladder';
 
 function App() {
   return (
@@ -20,9 +20,9 @@ function App() {
           <Route path="/soju" element={<SojuGame />} />
           <Route path="/lobby" element={<LobbyPage />} />
           <Route path="/game" element={<GamePage />} />
-          <Route path="/roulette" element={<RouletteGameLobby />} />
-          <Route path="/roulette/winner" element={<Winner />} />
-          <Route path="/roulette/ratio" element={<Ratio />} />
+          <Route path="/random" element={<RandomGameLobby />} />
+          <Route path="/random/roulette" element={<Winner />} />
+          <Route path="/random/ladder" element={<Ladder />} />
           {/* 기타 라우트 정의 가능 */}
         </Routes>
       </RouletteProvider>

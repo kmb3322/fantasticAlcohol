@@ -23,7 +23,7 @@ function HomePage() {
 
           <Flex direction="row" gap="23px" mt="100px">
             <SvgButton onClick={() => navigate('/soju')} />
-            <SvgButton onClick={() => navigate('/roulette')} />
+            <SvgButton onClick={() => navigate('/random')} />
           </Flex>
 
           <Text fontSize="20px" mt="100px" textColor="#14ACA4" textAlign="left" fontWeight={700} fontFamily={'Noto Sans KR'}>
