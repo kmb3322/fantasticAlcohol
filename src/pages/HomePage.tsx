@@ -39,7 +39,7 @@ function HomePage() {
               overlayText="고양이 잡기"
               overlaySubtext="장난꾸러기 고양이를 혼쭐내주세요!"
             />
-            <SvgButton onClick={() => navigate('/intro', { state: { destination: '/lobby' } })} />
+            <SvgButton onClick={() => navigate('/balloon/lobby', { state: { destination: '/balloon/game' } })} />
           </Flex>
         </VStack>
       </VStack>

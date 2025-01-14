@@ -10,6 +10,8 @@ const { Server } = require('socket.io');
 
 // controllers
 const { handleMoleGameConnection, rooms } = require('./controllers/moleGameController');
+const { handleBalloonGameConnection, rooms: balloonRooms } = require('./controllers/balloonGameController');
+
 
 const app = express();
 
@@ -201,6 +203,9 @@ io.on('connection', (socket) => {
 
   // 두더지 게임 소켓 로직
   handleMoleGameConnection(socket, io);
+   // 풍선 불기 게임 소켓 로직
+  handleBalloonGameConnection(socket, io);
+
 });
 
 // 3분 이상 활동 없는 유저 자동 제거
