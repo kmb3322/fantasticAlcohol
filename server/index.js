@@ -24,7 +24,7 @@ const additionalOrigins = [
 ];
 const corsOptions = {
   origin: [FRONTEND_URL, ...additionalOrigins],
-  methods: ['GET', 'POST'],
+  methods: ['GET', 'POST', 'OPTIONS'],
   credentials: true,
   optionsSuccessStatus: 200,
 };
