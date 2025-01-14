@@ -23,10 +23,10 @@ function HomePage() {
 
           <Flex direction="row" gap="23px" mt="100px">
             <SvgButton onClick={() => navigate('/soju')} />
-            <SvgButton onClick={() => navigate('/lobby')} />
+            <SvgButton onClick={() => navigate('/random')} />
           </Flex>
 
-          <Text fontSize="20px" mt="100px"  textColor="#14ACA4" textAlign="left" fontWeight={700} fontFamily={'Noto Sans KR'}>
+          <Text fontSize="20px" mt="100px" textColor="#14ACA4" textAlign="left" fontWeight={700} fontFamily={'Noto Sans KR'}>
             각자 폰으로 다함께!
           </Text>
           <Text fontSize="12px" fontWeight={250} opacity={0.65} mt={-3}>
