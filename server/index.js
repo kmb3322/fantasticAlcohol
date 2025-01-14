@@ -1,4 +1,3 @@
-//server/index.js
 require('dotenv').config();
 
 const express = require("express");
@@ -12,17 +11,9 @@ const { Server } = require('socket.io');
 // controllers
 const { handleMoleGameConnection, rooms } = require('./controllers/moleGameController');
 
-// ----------- Express 앱, 이미지 업로드 및 Vision API 설정 -----------
 const app = express();
 
-// 업로드 설정 (multer)
-const upload = multer({
-  limits: {
-    fileSize: 5 * 1024 * 1024, // 5MB
-  }
-}).single('image');
-
-// .env의 FRONTEND_URL 사용 및 추가 허용 도메인 설정
+// CORS 설정
 const FRONTEND_URL = process.env.FRONTEND_URL || 'https://soju.monster';
 const additionalOrigins = [
   'https://soju.monster',
@@ -30,10 +21,7 @@ const additionalOrigins = [
   'https://51ef-2001-2d8-6a87-cd2e-8450-a2e1-9d1a-764e.ngrok-free.app',
   'https://fantastic-alcohol.vercel.app', 
   'https://www.soju.monster'
-  
 ];
-
-// CORS 설정: FRONTEND_URL과 추가 도메인을 허용
 const corsOptions = {
   origin: [FRONTEND_URL, ...additionalOrigins],
   methods: ['GET', 'POST'],
@@ -180,14 +168,17 @@ app.post('/analyze', (req, res) => {
 });
 
 // ----------- Socket.io 및 서버 생성 -----------
+// Socket 서버
 const PORT = process.env.PORT || 3000;
 const server = http.createServer(app);
+
 const io = new Server(server, {
   cors: {
     origin: [FRONTEND_URL, ...additionalOrigins],
     methods: ['GET', 'POST'],
     credentials: true,
   },
+  // transport나 다른 설정 필요하면 추가
 });
 
 // 소켓 연결
@@ -196,30 +187,28 @@ io.on('connection', (socket) => {
 
   // 두더지 게임 소켓 로직
   handleMoleGameConnection(socket, io);
-  // (추가 게임: 주사위 게임 등 있다면 이곳에 handleDiceGameConnection(socket, io) 등 추가)
 });
 
 // 3분 이상 활동 없는 유저 자동 제거
-const CLEANUP_INTERVAL = 30 * 1000; // 30초 간격으로 확인
+const CLEANUP_INTERVAL = 30 * 1000; // 30초 간격
 const INACTIVE_THRESHOLD = 3 * 60 * 1000; // 3분
 
 setInterval(() => {
   const now = Date.now();
   Object.keys(rooms).forEach((roomCode) => {
     const room = rooms[roomCode];
-    Object.entries(room.players).forEach(([sid, player]) => {
+    Object.keys(room.players).forEach((userId) => {
+      const player = room.players[userId];
       if (now - player.lastActivityAt > INACTIVE_THRESHOLD) {
-        delete room.players[sid];
+        delete room.players[userId];
       }
     });
-    // 인원 0명이면 방 삭제
     if (Object.keys(room.players).length === 0) {
       delete rooms[roomCode];
     }
   });
 }, CLEANUP_INTERVAL);
 
-// 서버 실행
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
