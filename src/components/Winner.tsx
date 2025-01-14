@@ -102,11 +102,28 @@ const Winner: React.FC = () => {
   };
 
   return (
-    <Box textAlign="center" mt={10}>
-      <Text fontSize="2xl" fontWeight="bold" mb={4}>당첨 룰렛</Text>
-      <Text fontSize="14px" color="#666" textAlign="center">
-      나만 아니면 돼~! 과연 오늘의 주인공은?<br/>룰렛판에 각자의 이름을 적어주세요
+    <Box
+      w="100%"
+      minH="100vh"
+      bg="#f9f9f9"
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      p="30px"
+      boxSizing="border-box"
+      fontFamily="Noto Sans KR"
+    >
+      <Box display="flex"
+        flexDirection="column"
+        alignItems="center"
+        textAlign="center"
+        mb="70px">
+        <Text fontWeight={700} fontSize="28px" opacity={0.8} mb="-2px">당첨 룰렛</Text>
+        <Text fontSize="14px" color="#666" textAlign="center">
+          나만 아니면 돼~! 과연 오늘의 주인공은?<br />룰렛판에 각자의 이름을 적어주세요
         </Text>
+      </Box>
 
       {/* 룰렛 표시 */}
       <Box display="inline-block" mb={4}>
@@ -121,7 +138,7 @@ const Winner: React.FC = () => {
       </Box>
 
       {/* 영역 이름 변경 버튼 */}
-      <Box mb={4}>
+      <Box mb="70px">
         {segments.map((seg, i) => (
           <Button
             key={i}
@@ -136,9 +153,12 @@ const Winner: React.FC = () => {
 
       {!result && (
         <Button bg="#F19C7A"
+        w="195px"
+        // h="52px"
+        borderRadius="20px"
           color="white"
           _hover={{ bg: "#e58c63" }}
-          _active={{ bg: "#d16f46" }} 
+          _active={{ bg: "#d16f46" }}
           onClick={handleStart}>
           돌리기
         </Button>

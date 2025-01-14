@@ -1,6 +1,6 @@
 // src/App.tsx
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import RandomGameLobby from './components/RandomGameLobby';
+import RouletteGameLobby from './components/RouletteGameLobby';
 import SojuGame from './components/SojuGame';
 import VideoIntro from './components/VideoIntro';
 import Winner from './components/Winner';
@@ -21,7 +21,7 @@ function App() {
           <Route path="/soju" element={<SojuGame />} />
           <Route path="/lobby" element={<LobbyPage />} />
           <Route path="/game" element={<GamePage />} />
-          <Route path="/random" element={<RandomGameLobby />} />
+          <Route path="/random" element={<RouletteGameLobby />} />
           <Route path="/random/roulette" element={<Winner />} />
           {/* 풍선불기 게임 관련 라우트 추가 */}
           <Route path="/balloon/lobby" element={<BalloonLobbyPage />} />
