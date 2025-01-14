@@ -20,7 +20,7 @@ function HomePage() {
           <Text fontSize="20px" mt="30px" textColor="#F19C7A" textAlign="left" fontWeight={700} fontFamily={'Noto Sans KR'}>
             하나의 폰으로 다함께!
           </Text>
-          <Text fontSize="12px" fontWeight={250} mt={-3}>
+          <Text fontSize="12px" fontWeight={250} mt={-3} mb={-5}>
             한 대의 폰으로 재밌는 게임을 시작할 수 있어요
           </Text>
 
@@ -42,7 +42,7 @@ function HomePage() {
           <Text fontSize="20px" mt="100px" textColor="#14ACA4" textAlign="left" fontWeight={700} fontFamily={'Noto Sans KR'}>
             각자 폰으로 다함께!
           </Text>
-          <Text fontSize="12px" fontWeight={250} opacity={0.65} mt={-3}>
+          <Text fontSize="12px" fontWeight={250} opacity={0.65} mt={-3} mb={-5}>
             최대 8대까지 동시에 접속할 수 있어요
           </Text>
           <Flex direction="row" gap="23px" mt="100px">
