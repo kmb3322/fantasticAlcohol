@@ -14,7 +14,7 @@ function HomePage() {
 
       <VStack>
         <VStack align="flex-start" width="full">
-          <Text fontSize="20px" mt="30px" textAlign="left" fontWeight={700} fontFamily={'Noto Sans KR'}>
+          <Text fontSize="20px" mt="30px" textColor="#F19C7A" textAlign="left" fontWeight={700} fontFamily={'Noto Sans KR'}>
             하나의 폰으로 다함께!
           </Text>
           <Text fontSize="12px" fontWeight={250} mt={-3}>
@@ -22,8 +22,18 @@ function HomePage() {
           </Text>
 
           <Flex direction="row" gap="23px" mt="100px">
-            <SvgButton onClick={() => navigate('/soju')} />
-            <SvgButton onClick={() => navigate('/random')} />
+            <SvgButton onClick={() => navigate('/soju')} 
+              overlayImage="/soju.png"
+              overlayText="소주잔 따르기"
+              overlaySubtext="장인의 모먼트를 보여주세요!"
+              textColor="#F19C7A"
+              />
+            <SvgButton onClick={() => navigate('/random')}
+              overlayImage="/roulette.png"
+              overlayText="룰렛 게임"
+              overlaySubtext="역시 인생은 복불복!"
+              textColor="#F19C7A"
+            />
           </Flex>
 
           <Text fontSize="20px" mt="100px" textColor="#14ACA4" textAlign="left" fontWeight={700} fontFamily={'Noto Sans KR'}>
