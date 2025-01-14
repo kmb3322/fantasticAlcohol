@@ -13,27 +13,29 @@ const { handleMoleGameConnection, rooms } = require('./controllers/moleGameContr
 
 const app = express();
 
-const FRONTEND_URLS = [
+// CORS 설정
+const FRONTEND_URL = process.env.FRONTEND_URL || 'https://soju.monster';
+const additionalOrigins = [
   'https://soju.monster',
-  'https://www.soju.monster',
-  'http://localhost:5173'
+  'http://localhost:5173', 
+  'https://51ef-2001-2d8-6a87-cd2e-8450-a2e1-9d1a-764e.ngrok-free.app',
+  'https://fantastic-alcohol.vercel.app', 
+  'https://www.soju.monster'
 ];
-
-
 const corsOptions = {
-  origin: FRONTEND_URLS,
+  origin: function (origin, callback) {
+    const allowedOrigins = [FRONTEND_URL, ...additionalOrigins];
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true,
-  optionsSuccessStatus: 200,
-  preflightContinue: false,
-  maxAge: 86400 // CORS 프리플라이트 요청 캐시 시간
+  credentials: true, // 쿠키 허용
+  optionsSuccessStatus: 200, // Safari 호환성
 };
-
 app.use(cors(corsOptions));
-
-// 프리플라이트 요청을 위한 OPTIONS 핸들러 추가
-app.options('*', cors(corsOptions));
 
 
 app.use(express.json());
@@ -178,16 +180,20 @@ app.post('/analyze', (req, res) => {
 const PORT = process.env.PORT || 3000;
 const server = http.createServer(app);
 
-
 const io = new Server(server, {
   cors: {
-    origin: FRONTEND_URLS,
-    methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true
+    origin: function (origin, callback) {
+      const allowedOrigins = [FRONTEND_URL, ...additionalOrigins];
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    methods: ['GET', 'POST'],
+    credentials: true, // 인증 정보 허용
   },
-  allowEIO3: true, // Engine.IO 이전 버전 호환성 허용
-  transports: ['websocket', 'polling'] // polling을 첫 번째로 시도하도록 순서 변경
+  transports: ['websocket', 'polling'], // Transport 설정
 });
 
 // 소켓 연결
