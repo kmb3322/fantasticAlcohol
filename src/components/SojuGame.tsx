@@ -1,5 +1,5 @@
 // src/components/Capture.tsx
-import { Box, Button, Text, VStack, useToast, useBreakpointValue } from "@chakra-ui/react";
+import { Box, Button, Text, Image, useToast, useBreakpointValue } from "@chakra-ui/react";
 import axios from "axios";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -41,7 +41,7 @@ function SojuGame() {
         return;
       }
 
-      const img = new Image();
+      const img = document.createElement('img');
       img.src = screenshot;
       await new Promise((resolve, reject) => {
         img.onload = resolve;
@@ -143,7 +143,7 @@ function SojuGame() {
 
 
     } catch (error) {
-      const err = error as any; 
+      const err = error as any;
       // alert(`에러 타입: ${error.name}\n에러 메시지: ${error.message}\n전체 에러: ${JSON.stringify(error)}`);
       console.log('상세 에러:', error);
       // 더 자세한 에러 정보 표시
@@ -171,17 +171,50 @@ function SojuGame() {
   };
 
   return (
-    <VStack spacing={6} p={4} align="center">
-      {/* 타이틀 */}
-      <Text fontWeight={700} fontSize="28px" opacity={0.8} mb="-2px">
-        소주잔 용량 맞추기💚
-      </Text>
-      <Text fontSize="14px" color="#666" textAlign="center">
-        목표 용량에 맞게 예측하여 각자 소주를<br />따른 후 가이드라인에 소주잔을 맞춰 사진을 찍어주세요!
-      </Text>
-      <Text fontSize="lg" color="#F19C7A" fontWeight={600}>
-        목표 용량: {targetVolume}ml
-      </Text>
+    <Box
+      w="100%"
+      minH="100vh"
+      bg="#f9f9f9"
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      p="30px"
+      boxSizing="border-box"
+      fontFamily="Noto Sans KR"
+    >
+      {/* 로고 & 타이틀 영역 */}
+      <Box
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        textAlign="center"
+        mb="30px"
+      >
+        <Image
+          width="211px"
+          height="94px"
+          objectFit="contain"
+          mb="2px"
+          src="/soju.png"
+          alt="soju logo"
+        />
+        <Text fontWeight={700} fontSize="28px" opacity={0.8} mb="-2px">
+          소주잔 용량 맞추기
+        </Text>
+        <Text fontSize="14px" color="#666" textAlign="center">
+          목표 용량에 맞게 예측하여 각자 소주를 따른 후<br />가이드라인에 소주잔을 맞춰 사진을 찍어주세요!
+        </Text>
+      </Box>
+      <Box
+        display="flex"
+        flexDirection="column"
+        mb="40px"
+      >
+        <Text fontSize="lg" color="#F19C7A" fontWeight={600}>
+          목표 용량: {targetVolume}ml
+        </Text>
+      </Box>
 
       {/* 카메라 영역 + 소주잔 SVG 가이드 */}
       <Box
@@ -194,6 +227,7 @@ function SojuGame() {
         overflow="hidden" // 이미지가 넘치지 않도록 설정
         borderRadius="md"
         boxShadow="md"
+        mb="70px"
       >
         <Webcam
           ref={webcamRef}
@@ -221,6 +255,9 @@ function SojuGame() {
 
       <Button
         bg="#F19C7A"
+        w="195px"
+        // h="52px"
+        borderRadius="20px"
         color="white"
         _hover={{ bg: "#e58c63" }}
         _active={{ bg: "#d16f46" }}
@@ -239,7 +276,7 @@ function SojuGame() {
         onRetry={handleRetry}
         onEnd={handleEnd}
       />
-    </VStack>
+    </Box>
   );
 }
 
