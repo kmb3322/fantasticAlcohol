@@ -7,9 +7,12 @@ function HomePage() {
   const navigate = useNavigate();
 
   return (
-    <Flex direction="column" align="center" width="100%" pt="102px" bg="#ffffff" minWidth="100vw" minHeight="100vh">
-      <Text fontSize="34px" textAlign="center" fontWeight={700} fontFamily={'Noto Sans KR'}>
+    <Flex direction="column" align="center" width="100%" pt="72px" bg="#ffffff" minWidth="100vw" minHeight="100vh">
+      <Text fontSize="34px" textAlign="center" fontWeight={700} fontFamily={'Noto Sans KR'} mb={-2}>
         죽음의 술게임 ❤️
+      </Text>
+      <Text fontSize="20px" textAlign="center" fontWeight={200} fontFamily={'Noto Sans KR'}>
+        soju.monster
       </Text>
 
       <VStack>
@@ -49,7 +52,12 @@ function HomePage() {
               overlayText="고양이 잡기"
               overlaySubtext="장난꾸러기 고양이를 혼쭐내주세요!"
             />
-            <SvgButton onClick={() => navigate('/intro', { state: { destination: '/lobby' } })} />
+            <SvgButton onClick={() => navigate('/balloon/lobby', { state: { destination: '/balloon/game' } })} 
+              overlayImage="/balloonicon.png"
+              overlayText="풍선 불기"
+              overlaySubtext="가장 거대한 풍선을 만들어 봐요!"
+              
+              />
           </Flex>
         </VStack>
       </VStack>

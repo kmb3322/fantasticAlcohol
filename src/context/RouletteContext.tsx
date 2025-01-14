@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, ReactNode } from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
 
 type RouletteType = '당첨 룰렛' | '비율 룰렛';
 

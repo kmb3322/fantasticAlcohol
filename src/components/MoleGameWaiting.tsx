@@ -75,26 +75,26 @@ function MoleGameWaiting({ isHost, startGameError, onStartGame }: MoleGameWaitin
     <VStack spacing={4} align="stretch" w="full" maxW="sm" mx="auto" p={4}>
       {/* 게임 시작 버튼 */}
       {isHost ? (
-        <Button colorScheme="teal" onClick={onStartGame} w="full">
+        <Button mt={-5} colorScheme="teal" onClick={onStartGame} w="full">
           게임 시작
         </Button>
       ) : (
-        <Text textAlign="center">방장이 시작하기를 기다리는 중...</Text>
+        <Text mt={-3} fontSize={18} textAlign="center">방장이 시작하기를 기다리는 중...</Text>
       )}
 
       {startGameError && <Text color="red.500">{startGameError}</Text>}
-      <Text fontSize="sm" color="gray.500">
-        (최소 2명, 최대 8명이 함께 플레이 가능합니다.)
-      </Text>
+      
 
       {/* 채팅 메시지 표시 영역 */}
       <Box
         ref={chatBoxRef}
         borderWidth="1px"
-        borderRadius="md"
-        p={2}
+        borderRadius={12}
+        p={4}
+        bg="#FFF"
         h={chatBoxHeight}
         overflowY="auto"
+        boxShadow="0px 2px 13.7px 0px rgba(0, 0, 0, 0.10)"
       >
         {chatMessages.map((chat, idx) => (
           <Box key={idx} mb={1}>
@@ -114,8 +114,12 @@ function MoleGameWaiting({ isHost, startGameError, onStartGame }: MoleGameWaitin
           onChange={(e) => setMessage(e.target.value)}
           onKeyDown={handleKeyDown}
           flex="1"
+          borderRadius="20px"
+            border="none"
+            bg="#FFF"
+            boxShadow="0px 2px 13.7px 0px rgba(0, 0, 0, 0.10)"
         />
-        <Button colorScheme="blue" onClick={handleSendChat}>
+        <Button boxShadow="0px 2px 13.7px 0px rgba(0, 0, 0, 0.10)" color="#FFF" bg="#14ACA4" onClick={handleSendChat}>
           전송
         </Button>
       </HStack>
