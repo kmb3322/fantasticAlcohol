@@ -11,7 +11,7 @@ const RouletteGameLobby: React.FC = () => {
     if (rouletteType === '당첨 룰렛') {
       navigate('/random/roulette');
     } else {
-      navigate('/random/ladder');
+      navigate('/random/russian');
     }
   };
 
@@ -72,10 +72,10 @@ const RouletteGameLobby: React.FC = () => {
           bg="#FFF"
           boxShadow="0px 2px 13.7px 0px rgba(0, 0, 0, 0.10)"
           value={rouletteType}
-          onChange={(e) => setRouletteType(e.target.value as '당첨 룰렛' | '비율 룰렛')}
+          onChange={(e) => setRouletteType(e.target.value as '당첨 룰렛' | '러시안 룰렛')}
         >
           <option value="당첨 룰렛">당첨 룰렛</option>
-          <option value="비율 룰렛">사다리타기</option>
+          <option value="비율 룰렛">러시안 룰렛</option>
         </Select>
       </Box>
       <Box
