@@ -184,7 +184,7 @@ function BeerGame() {
         flexDirection="column"
         alignItems="center"
         textAlign="center"
-        mb="30px"
+        mb="20px"
       >
         <Image
           width="211px"
@@ -204,7 +204,7 @@ function BeerGame() {
       <Box
         display="flex"
         flexDirection="column"
-        mb="40px"
+        mb="30px"
       >
         <Text fontSize="lg" color="#F19C7A" fontWeight={600}>
           목표 용량: {targetVolume}ml
@@ -214,15 +214,15 @@ function BeerGame() {
       {/* 카메라 영역 + 맥주잔 SVG 가이드 */}
       <Box
         position="relative"
-        width={["80vw", "240px"]}
+        width={["70vw", "200px"]}
         aspectRatio="3 / 4"
         bg="gray.200"
-        maxW="240px"
+        maxW="200px"
         w="100%"
         overflow="hidden"
         borderRadius="md"
         boxShadow="md"
-        mb="70px"
+        mb="30px"
       >
         <Webcam
           ref={webcamRef}
