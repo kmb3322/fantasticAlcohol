@@ -1,10 +1,10 @@
-import { Box, Button, Text, Image, useToast, useBreakpointValue } from "@chakra-ui/react";
+import { Box, Button, Image, Text, useBreakpointValue, useToast } from "@chakra-ui/react";
 import axios from "axios";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Webcam from "react-webcam";
-import ResultModal from "./ResultModal";
 import BeerGlass from "./BeerGlass"; // 맥주잔 가이드라인 컴포넌트
+import ResultModal from "./ResultModal";
 
 function BeerGame() {
   const navigate = useNavigate();
@@ -18,7 +18,6 @@ function BeerGame() {
 
  // 결과 모달 관련 상태
  const [isModalOpen, setIsModalOpen] = useState(false);
- const [resultType, setResultType] = useState<"less" | "more" | 'exact' | null>(null);
  const [resultMessage, setResultMessage] = useState<string>("");
  const [capturedImage, setCapturedImage] = useState<string>(""); // 팝업에 띄울 사진
  const [predictedVolume, setPredictedVolume] = useState<number | null>(null); // 서버에서 받은 예측 용량
@@ -128,13 +127,10 @@ function BeerGame() {
 
       // 결과 판정
       if (volume > targetVolume + 2) {
-        setResultType("more");
         setResultMessage(`목 말랐군요😉\n목표 용량보다 많이 따랐어요`);
       } else if (volume < targetVolume - 2) {
-        setResultType("less");
         setResultMessage(`앗 아쉬워요😢\n목표 용량보다 적게 따랐어요`);
       } else {
-        setResultType("exact");
         setResultMessage(`장인이시네요🤩\n딱 맞게 따랐어요!`);
       }
 
@@ -161,7 +157,6 @@ function BeerGame() {
     setIsModalOpen(false);
     setCapturedImage("");
     setPredictedVolume(null);
-    setResultType(null);
     setResultMessage("");
   };
 
