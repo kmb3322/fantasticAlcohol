@@ -76,7 +76,7 @@ function DrinkGameLobby() {
           >
             <VStack>
               <Image
-                src="/soju.png"
+                src="/beer.png"
                 alt="맥주"
                 w="60px"
                 mb={2}

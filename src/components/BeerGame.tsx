@@ -196,7 +196,7 @@ function BeerGame() {
           height="94px"
           objectFit="contain"
           mb="2px"
-          src="/soju.png"
+          src="/beer.png"
           alt="beer logo"
         />
         <Text fontWeight={700} fontSize="28px" opacity={0.8} mb="-2px">
