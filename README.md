@@ -147,9 +147,7 @@ Android/iOS/Windows/macOS 를 비롯한 **모든 플랫폼에서 호환 가능�
 > React+Vite
 > 
 
-![React-icon.svg.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/37436834-10b4-4695-a58a-3050524c30b7/React-icon.svg.png)
 
-![logo.svg](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/40cbea86-f08b-4c1f-af00-7639f19fef53/logo.svg)
 
 > **Backend**
 > 
@@ -159,9 +157,7 @@ Android/iOS/Windows/macOS 를 비롯한 **모든 플랫폼에서 호환 가능�
 > Socket.io
 > 
 
-![nodejs.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/aa7aadcf-db98-4440-a861-9f247db5c82e/nodejs.png)
 
-![socketio.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/7afc1e50-590e-4828-a7af-ecffb4c11803/c00b38b9-4254-4987-81be-bb5dc1eb0c43.png)
 
 > **Vision API**
 > 
@@ -171,9 +167,6 @@ Android/iOS/Windows/macOS 를 비롯한 **모든 플랫폼에서 호환 가능�
 > Open AI GPT-4o-mini
 > 
 
-![cloud vision.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/6d96cf8b-9bfa-4dc6-96fc-35451b03bf81/a870abc5-ed01-40c1-bedb-1fca9e361f3f.png)
-
-![OpenAI.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/8da32ae1-88e4-40af-9027-8538e187ce98/6daad06b-11de-4848-b66d-d7dca8593387.png)
 
 > **배포**
 > 
