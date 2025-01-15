@@ -1,4 +1,4 @@
-import { Box, Button, Heading, Image, Text, VStack } from "@chakra-ui/react";
+import { Box, Button, Image, Text, VStack } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 function DrinkGameLobby() {

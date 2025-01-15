@@ -8,15 +8,14 @@ import {
   ModalBody,
   ModalContent,
   ModalFooter,
-  ModalHeader,
   ModalOverlay,
   Text,
   useToast
 } from "@chakra-ui/react";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
-import { useRouletteContext } from "../context/RouletteContext";
 import { useNavigate } from "react-router-dom";
+import { useRouletteContext } from "../context/RouletteContext";
 
 // 사운드 파일 임포트
 import emptyGunshotSound from "../assets/empty-gunshot.mp3";
