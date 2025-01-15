@@ -142,7 +142,7 @@ app.post('/analyze', (req, res) => {
             content: [
               {
                 type: "text",
-                text: "이 이미지의 잔에 담긴 음료의 양을 ml 단위로 숫자만 답변해주세요. 예시: 25"
+                text: "이 이미지의 잔에 담긴 음료의 양을 ml 단위로 숫자만 답변해주세요. 소주잔은 20~50ml, 맥주잔은 max 100~225ml. 예시: 25"
               },
               {
                 type: "image_url",
