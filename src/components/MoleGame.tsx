@@ -1,9 +1,8 @@
-//src/components/MoleGame.tsx
+// src/components/MoleGame.tsx
 import { useEffect, useState } from 'react';
 import { socket } from '../socket';
 import MoleGameWaiting from './MoleGameWaiting';
 
-// Chakra UI
 import {
   Box,
   Button,
@@ -12,16 +11,21 @@ import {
   Heading,
   Image,
   ListItem,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   OrderedList,
   Text,
+  useDisclosure,
   useToast,
-  VStack,
+  VStack
 } from '@chakra-ui/react';
-
-// Framer Motion
 import { AnimatePresence, motion } from 'framer-motion';
 
-// Chakra + Framer Motion 결합용 컴포넌트
 const MotionBox = motion(Box);
 
 interface IPlayer {
@@ -45,14 +49,12 @@ function MoleGame({ roomCode, isHost, onGoHome }: MoleGameProps) {
   const [moleIndex, setMoleIndex] = useState(-1);
   const [startGameError, setStartGameError] = useState('');
   const [gameResult, setGameResult] = useState<IPlayer[] | null>(null);
-
-  // "내가 직접 클릭한 두더지" 인덱스 (애니메이션 구분용)
   const [clickedMoleIndex, setClickedMoleIndex] = useState<number | null>(null);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const toast = useToast();
 
   useEffect(() => {
-    // --- Socket 이벤트 설정 ---
     const handlePlayerList = (players: IPlayer[]) => setPlayerList(players);
     socket.on('mole:playerList', handlePlayerList);
 
@@ -113,7 +115,6 @@ function MoleGame({ roomCode, isHost, onGoHome }: MoleGameProps) {
     };
     socket.on('mole:hideMole', handleHideMole);
 
-    // --- Cleanup ---
     return () => {
       socket.off('mole:playerList', handlePlayerList);
       socket.off('startGameError', handleStartGameError);
@@ -126,6 +127,12 @@ function MoleGame({ roomCode, isHost, onGoHome }: MoleGameProps) {
     };
   }, [toast]);
 
+  useEffect(() => {
+    if (gameResult) {
+      onOpen();
+    }
+  }, [gameResult, onOpen]);
+
   const handleStartGame = () => {
     socket.emit('mole:startGame');
   };
@@ -137,18 +144,21 @@ function MoleGame({ roomCode, isHost, onGoHome }: MoleGameProps) {
 
   return (
     <Box p={5} bg="#f5f5f5" minH="100vh">
-      <Button 
-        onClick={onGoHome} 
-        colorScheme="teal" 
-        variant="outline" 
-        ml={-4} 
-        mb={10}
-      >
-        ← 메인으로
-      </Button>
+      {/* 게임이 시작되지 않았을 때만 메인으로 버튼 표시 */}
+      {!gameStarted && (
+        <Button 
+          onClick={onGoHome} 
+          colorScheme="teal" 
+          variant="outline" 
+          ml={-4} 
+        >
+          ← 메인으로
+        </Button>
+      )}
 
       <VStack align="center" spacing={3}>
         <Image
+          mt={10}
           width="211px"
           height="94px"
           objectFit="contain"
@@ -160,10 +170,9 @@ function MoleGame({ roomCode, isHost, onGoHome }: MoleGameProps) {
           고양이 잡기
         </Text>
 
-        {/* gameStarted일 때 '잡은 고양이 수' 표시 */}
         {gameStarted && (
           <>
-            <Text fontSize={20} fontWeight={700} mt={5} mb={1}>
+            <Text fontSize="20px" fontWeight={700} mt={5} mb={1}>
               잡은 고양이 수
             </Text>
             <VStack align="center" spacing={1}>
@@ -176,14 +185,12 @@ function MoleGame({ roomCode, isHost, onGoHome }: MoleGameProps) {
           </>
         )}
 
-        {/* 게임 시작 전일 때 방 코드와 접속자 수 표시 */}
         {!gameStarted && (
           <>
             <Text fontSize="14px" mt={-3} color="gray.500">
-            30초 동안 튀어나오는 고양이를 가장 많이 잡으면 우승!
-          </Text>
-            
-            <Text fontSize={16} color="gray.500" mt={5} mb={-5}>
+              30초 동안 튀어나오는 고양이를 가장 많이 잡으면 우승!
+            </Text>
+            <Text fontSize={16} color="gray.500" mt={2} mb={-5}>
               방 코드
             </Text>
             <Text fontSize="38px" fontWeight={700} color="#14ACA4" mb={-3}>
@@ -291,23 +298,44 @@ function MoleGame({ roomCode, isHost, onGoHome }: MoleGameProps) {
 
       <Divider my={4} />
 
-    
-
-      {gameResult && (
-        <Box mt={5}>
-          <Heading size="md" mb={2}>
-            게임 종료!
-          </Heading>
-          <OrderedList>
-            {gameResult.map((p, i) => (
-              <ListItem key={p.socketId}>
-                {i + 1}등 - <Box as="span" fontWeight={700}>{p.nickname}</Box> ({p.score}점)
-              </ListItem>
-            ))}
-          </OrderedList>
-        </Box>
-      )}
-
+      {/* 모달: 게임 결과 표시 */}
+      <Modal isOpen={isOpen} onClose={onClose} isCentered size="lg">
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader textAlign="center">게임 종료!</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <VStack spacing={3}>
+              <AnimatePresence>
+                {/* 축하 애니메이션 효과 예시 (고양이 이미지와 함께) */}
+                <MotionBox
+                  key="celebrate"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: [0, 1.5, 1] }}
+                  transition={{ duration: 1 }}
+                >
+                  <Image src="/cat.png" alt="celebrate"
+                  width="131px"
+                  height="94px"
+                />
+                </MotionBox>
+              </AnimatePresence>
+              <OrderedList>
+                {gameResult?.map((p, i) => (
+                  <ListItem key={p.socketId}>
+                    {i + 1}등 - <Box as="span" fontWeight={700}>{p.nickname}</Box> ({p.score}점)
+                  </ListItem>
+                ))}
+              </OrderedList>
+            </VStack>
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="teal" mr={3} onClick={onClose}>
+              확인
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Box>
   );
 }

@@ -3,17 +3,23 @@ import { useEffect, useState } from 'react';
 import { socket } from '../socket';
 import BalloonGameWaiting from './BalloonGameWaiting';
 
-// Chakra UI 및 Framer Motion
 import {
   Box,
   Button,
   Divider,
-  Heading,
   Image,
   ListItem,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   OrderedList,
   Text,
   VStack,
+  useDisclosure
 } from '@chakra-ui/react';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -34,7 +40,6 @@ type BalloonGameProps = {
 
 const MotionBox = motion(Box);
 
-// 풍선 터질 때 재생할 소리 객체 생성
 const popSound = new Audio('/pop.mp3');
 
 function BalloonGame({ roomCode, isHost, onGoHome }: BalloonGameProps) {
@@ -43,8 +48,8 @@ function BalloonGame({ roomCode, isHost, onGoHome }: BalloonGameProps) {
   const [timeLeft, setTimeLeft] = useState(0);
   const [startGameError, setStartGameError] = useState('');
   const [gameResult, setGameResult] = useState<IPlayer[] | null>(null);
+  const { isOpen, onOpen, onClose } = useDisclosure();
   
-  // 풍선 애니메이션 및 상태 관련
   const [balloonScale, setBalloonScale] = useState(1);
   const [balloonPopped, setBalloonPopped] = useState(false);
 
@@ -76,10 +81,9 @@ function BalloonGame({ roomCode, isHost, onGoHome }: BalloonGameProps) {
     socket.on('balloon:gameEnded', handleGameEnded);
 
     const handleBalloonPopped = ({ socketId }: { socketId: string }) => {
-      // 자신이 터뜨린 경우에만 처리
       if (socket.id === socketId) {
         setBalloonPopped(true);
-        popSound.play(); // 풍선 터질 때 소리 재생
+        popSound.play();
       }
     };
     socket.on('balloon:popped', handleBalloonPopped);
@@ -94,6 +98,13 @@ function BalloonGame({ roomCode, isHost, onGoHome }: BalloonGameProps) {
     };
   }, []);
 
+  // 게임 결과가 업데이트되면 모달 열기
+  useEffect(() => {
+    if (gameResult) {
+      onOpen();
+    }
+  }, [gameResult, onOpen]);
+
   const handleStartGame = () => {
     socket.emit('balloon:startGame');
   };
@@ -105,7 +116,6 @@ function BalloonGame({ roomCode, isHost, onGoHome }: BalloonGameProps) {
   const handleBlow = () => {
     if (balloonPopped) return;
 
-    // 디바이스 진동 효과 (지원 시)
     if (navigator.vibrate) {
       navigator.vibrate(50);
     }
@@ -116,21 +126,24 @@ function BalloonGame({ roomCode, isHost, onGoHome }: BalloonGameProps) {
 
   return (
     <Box p={5} bg="#f5f5f5" minH="100vh">
-      <Button 
-        onClick={handleGoHome} 
-        colorScheme="teal" 
-        variant="outline" 
-        ml={-4} 
-        mb={10}
-      >
-        ← 메인으로
-      </Button>
+      {/* 게임이 시작되지 않았을 때만 메인으로 버튼 표시 */}
+      {!gameStarted && (
+        <Button 
+          onClick={handleGoHome} 
+          colorScheme="teal" 
+          variant="outline" 
+          ml={-4} 
+
+        >
+          ← 메인으로
+        </Button>
+      )}
 
       <VStack align="center" spacing={3}>
-        {/* 게임 시작 전일 때만 방 코드와 접속자 수 표시 */}
         {!gameStarted && (
           <>
             <Image
+              mt={10}
               width="211px"
               height="94px"
               objectFit="contain"
@@ -148,7 +161,7 @@ function BalloonGame({ roomCode, isHost, onGoHome }: BalloonGameProps) {
             <Text fontSize="sm" mt={-2} color="gray.500">
               너무 크게 불면 터져 버릴 수도 있어요.
             </Text>
-            <Text fontSize={16} color="gray.500" mt={5} mb={-5}>
+            <Text fontSize={16} color="gray.500" mt={2} mb={-5}>
               방 코드
             </Text>
             <Text fontSize={38} fontWeight={700} color="#14ACA4" mb={-3}>
@@ -240,26 +253,47 @@ function BalloonGame({ roomCode, isHost, onGoHome }: BalloonGameProps) {
 
       <Divider my={4} />
 
-      {gameResult && (
-        <Box mt={5}>
-          <Heading size="md" mb={2}>
-            게임 종료!
-          </Heading>
-          <OrderedList>
-            {gameResult.map((p, i) => (
-              <ListItem key={p.socketId}>
-                {i + 1}등 - <Box as="span" fontWeight={700}>{p.nickname}</Box> (크기: {p.balloonSize}
-                {p.popped && p.popOrder
-                  ? `, ${p.popOrder}번째로 터짐`
-                  : p.popped
-                  ? ', 터짐'
-                  : ''}
-                )
-              </ListItem>
-            ))}
-          </OrderedList>
-        </Box>
-      )}
+      {/* 모달: 게임 결과 표시 */}
+      <Modal isOpen={isOpen} onClose={onClose} isCentered size="lg">
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader textAlign="center">게임 종료!</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <VStack spacing={3}>
+              <AnimatePresence>
+                {/* 축하 애니메이션 효과 예시 (풍선 이미지와 함께) */}
+                <MotionBox
+                  key="celebrate"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: [0, 1.5, 1] }}
+                  transition={{ duration: 1 }}
+                >
+                  <Image src="/balloon.png" alt="celebrate" boxSize="100px" />
+                </MotionBox>
+              </AnimatePresence>
+              <OrderedList>
+                {gameResult?.map((p, i) => (
+                  <ListItem key={p.socketId}>
+                    {i + 1}등 - <Box as="span" fontWeight={700}>{p.nickname}</Box> (크기: {p.balloonSize}
+                    {p.popped && p.popOrder
+                      ? `, ${p.popOrder}번째로 터짐`
+                      : p.popped
+                      ? ', 터짐'
+                      : ''}
+                    )
+                  </ListItem>
+                ))}
+              </OrderedList>
+            </VStack>
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="teal" mr={3} onClick={onClose}>
+              확인
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Box>
   );
 }

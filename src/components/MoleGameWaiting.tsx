@@ -82,7 +82,7 @@ function MoleGameWaiting({ isHost, startGameError, onStartGame }: MoleGameWaitin
         <Text mt={-3} fontSize={18} textAlign="center">방장이 시작하기를 기다리는 중...</Text>
       )}
 
-      {startGameError && <Text color="red.500">{startGameError}</Text>}
+      {startGameError && <Text textAlign="center" mt={-3} color="red.500">{startGameError}</Text>}
       
 
       {/* 채팅 메시지 표시 영역 */}

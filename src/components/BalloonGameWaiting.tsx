@@ -1,13 +1,13 @@
 // src/components/BalloonGameWaiting.tsx
 import {
-    Box,
-    Button,
-    HStack,
-    Input,
-    Text,
-    useBreakpointValue,
-    useToast,
-    VStack,
+  Box,
+  Button,
+  HStack,
+  Input,
+  Text,
+  useBreakpointValue,
+  useToast,
+  VStack,
 } from '@chakra-ui/react';
 import { useEffect, useRef, useState } from 'react';
 import { socket } from '../socket';
@@ -100,7 +100,7 @@ import { socket } from '../socket';
         ) : (
           <Text textAlign="center">방장이 시작하기를 기다리는 중...</Text>
         )}
-        {startGameError && <Text color="red.500">{startGameError}</Text>}
+        {startGameError && <Text textAlign="center" mt={-3} color="red.500">{startGameError}</Text>}
 
   
         {/* 게임 타이머 표시 */}

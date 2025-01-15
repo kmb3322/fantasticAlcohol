@@ -53,8 +53,8 @@ function VideoIntro() {
         style={{
           backgroundColor: 'rgba(255, 255, 255, 0.8)',
           position: 'absolute',
-          top: '20px',          // 상단에서 조금 아래로 조정
-          right: '20px',        // 오른쪽 모서리에 위치
+          top: '100px',          // 상단에서 조금 아래로 조정
+          right: '10px',        // 오른쪽 모서리에 위치
           padding: '10px 20px',
           fontSize: '20px',
           cursor: 'pointer',
