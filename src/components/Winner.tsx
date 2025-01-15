@@ -153,9 +153,9 @@ const Winner: React.FC = () => {
 
       {!result && (
         <Button bg="#F19C7A"
-        w="195px"
-        // h="52px"
-        borderRadius="20px"
+          w="195px"
+          // h="52px"
+          borderRadius="20px"
           color="white"
           _hover={{ bg: "#e58c63" }}
           _active={{ bg: "#d16f46" }}
@@ -191,19 +191,31 @@ const Winner: React.FC = () => {
       {/* 결과 팝업 모달 */}
       <Modal isOpen={isResultModalOpen} onClose={onResultModalClose} isCentered>
         <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>당첨 결과</ModalHeader>
+        <ModalContent p={4} borderRadius="15px">
           <ModalBody>
-            <Text fontSize="xl" fontWeight="bold" mb={2}>
-              당첨: {result}
-            </Text>
-            <Text color="green.500">축하합니다!</Text>
+            <Box mb="30px">
+              <Text fontSize="18px" fontWeight={600} textAlign="center" whiteSpace="pre-line">
+                🎉축하합니다!🎉
+              </Text>
+            </Box>
+            <Box mb="30px">
+              <Text fontSize="24px" fontWeight={800} textAlign="center">
+                당첨: {result}
+              </Text>
+            </Box>
           </ModalBody>
-          <ModalFooter>
-            <Button colorScheme="blue" mr={2} onClick={() => { handleRetry(); onResultModalClose(); }}>
+          <ModalFooter justifyContent="space-around">
+            <Button variant="outline" size="lg" onClick={() => { handleRetry(); onResultModalClose(); }}>
               다시하기
             </Button>
-            <Button onClick={() => { navigate('/'); onResultModalClose(); }}>
+            <Button 
+            variant="solid"
+            bg="#F19C7A"
+            color="white"
+            _hover={{ bg: "#e58c63" }}
+            _active={{ bg: "#d16f46" }}
+            size="lg"
+            onClick={() => { navigate('/'); onResultModalClose(); }}>
               게임 종료
             </Button>
           </ModalFooter>
