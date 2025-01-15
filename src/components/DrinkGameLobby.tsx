@@ -1,4 +1,4 @@
-import { Box, Button, Text, Image, VStack, Heading } from "@chakra-ui/react";
+import { Box, Button, Heading, Image, Text, VStack } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 function DrinkGameLobby() {
@@ -27,8 +27,11 @@ function DrinkGameLobby() {
           >
             AI 술잔 용량 맞추기
           </Heading>
-          <Text fontSize="16px" color="#666">
-            당신의 감각을 테스트해보세요!
+          <Text fontSize="14px" color="#666">
+            주어진 용량 이상으로 따르면, 맛있게 마시고 😋
+          </Text>
+          <Text fontSize="14px" color="#666">
+            적게 따르면, 꽉 채워서 마시기☠️
           </Text>
         </Box>
 

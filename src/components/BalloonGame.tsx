@@ -143,7 +143,10 @@ function BalloonGame({ roomCode, isHost, onGoHome }: BalloonGameProps) {
             </Text>
 
             <Text fontSize="sm" mt={-2} color="gray.500">
-              최소 2명, 최대 8명이 함께 플레이 가능합니다.
+              풍선 불기 버튼으로, 20초 내에 가장 큰 풍선을 불어주세요!
+            </Text>
+            <Text fontSize="sm" mt={-2} color="gray.500">
+              너무 크게 불면 터져 버릴 수도 있어요.
             </Text>
             <Text fontSize={16} color="gray.500" mt={5} mb={-5}>
               방 코드
@@ -156,6 +159,9 @@ function BalloonGame({ roomCode, isHost, onGoHome }: BalloonGameProps) {
             </Text>
             <Text fontSize={38} fontWeight={700} color="#14ACA4">
               {playerList.length}명
+            </Text>
+            <Text fontSize="sm" mt={-4} color="gray.500">
+              최소 2명, 최대 8명이 함께 플레이 가능합니다.
             </Text>
           </>
         )}

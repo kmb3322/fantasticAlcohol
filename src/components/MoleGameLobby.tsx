@@ -105,7 +105,7 @@ function MoleGameLobby({ onJoinedRoom }: MoleGameLobbyProps) {
         <Text fontWeight={700} fontSize="28px" opacity={0.8} mb="-2px">
           고양이 잡기
         </Text>
-        <Text fontSize="14px" color="#666">
+        <Text fontSize="14px" color="gray.500">
           장난꾸러기 고양이를 혼쭐내주세요!
         </Text>
       </Box>

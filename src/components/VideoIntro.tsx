@@ -24,22 +24,37 @@ function VideoIntro() {
   };
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100vh', overflow: 'hidden', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <div 
+      style={{
+        position: 'relative', 
+        width: '100%', 
+        height: '100vh', 
+        overflow: 'hidden', 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center',
+        backgroundColor: 'black'  // 배경색 지정 (필요 시)
+      }}
+    >
       <video
         ref={videoRef}
         src="/catstory.mp4"
-        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+        playsInline
+        webkit-playsinline
         autoPlay
         onEnded={handleVideoEnd}
+        style={{
+          height: '80%',        // 화면 높이의 80%로 줄임
+          objectFit: 'cover',
+        }}
       />
       <button
         onClick={handleSkip}
         style={{
-            backgroundColor: 'rgba(255, 255, 255, 0.8)',
+          backgroundColor: 'rgba(255, 255, 255, 0.8)',
           position: 'absolute',
-          top: '40px',
-          left: '90%',
-          transform: 'translateX(-50%)',
+          top: '20px',          // 상단에서 조금 아래로 조정
+          right: '20px',        // 오른쪽 모서리에 위치
           padding: '10px 20px',
           fontSize: '20px',
           cursor: 'pointer',
