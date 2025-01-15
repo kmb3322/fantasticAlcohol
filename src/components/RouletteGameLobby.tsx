@@ -1,4 +1,4 @@
-import { Box, Button, FormLabel, Image, Select, Text } from '@chakra-ui/react';
+import { Box, Button, FormLabel, Image, Select, Text, VStack, HStack } from '@chakra-ui/react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRouletteContext } from '../context/RouletteContext';
@@ -34,7 +34,7 @@ const RouletteGameLobby: React.FC = () => {
         flexDirection="column"
         alignItems="center"
         textAlign="center"
-        mb="70px"
+        mb="50px"
       >
         <Image
           width="211px"
@@ -54,29 +54,65 @@ const RouletteGameLobby: React.FC = () => {
         flexDirection="column"
         mb="50px"
       >
-        <FormLabel
-          mb="8px"
-          ml="-24px"
-          fontWeight="bold"
-          fontSize="15px"
-          color="#333"
-        >
-          랜덤 유형
-        </FormLabel>
-        <Select
-          mb={4}
-          w="196px"
-          h="37px"
-          borderRadius="full"
-          border="none"
-          bg="#FFF"
-          boxShadow="0px 2px 13.7px 0px rgba(0, 0, 0, 0.10)"
-          value={rouletteType}
-          onChange={(e) => setRouletteType(e.target.value as '당첨 룰렛' | '러시안 룰렛')}
-        >
-          <option value="당첨 룰렛">당첨 룰렛</option>
-          <option value="비율 룰렛">러시안 룰렛</option>
-        </Select>
+        
+        <HStack spacing={4} w="100%" maxW="300px">
+          {/* 당첨 룰렛 버튼 */}
+          <Button
+            w="150px"
+            h="150px"
+            onClick={() => setRouletteType('당첨 룰렛')}
+            bg="white"
+            border="1px solid"
+            borderColor={rouletteType === '당첨 룰렛' ? "#F19C7A" : "gray.200"}
+            borderRadius="xl"
+            _hover={{ transform: "translateY(-2px)", boxShadow: "lg" }}
+            transition="all 0.2s"
+          >
+            <VStack>
+              <Image
+                src="/roulette.png"
+                alt="당첨 룰렛"
+                w="55px"
+                mb={-1}
+              />
+              <Text fontWeight={600} color="#F19C7A">
+                당첨 룰렛
+              </Text>
+              <Text fontSize="12px" fontWeight={250} color="gray.500">
+                한 명만 당첨!
+              </Text>
+            </VStack>
+          </Button>
+
+          {/* 러시안 룰렛 버튼 */}
+          <Button
+            w="150px"
+            h="150px"
+            onClick={() => setRouletteType('러시안 룰렛')}
+            bg="white"
+            border="1px solid"
+            borderColor={rouletteType === '러시안 룰렛' ? "#F19C7A" : "gray.200"}
+            borderRadius="xl"
+            _hover={{ transform: "translateY(-2px)", boxShadow: "lg" }}
+            transition="all 0.2s"
+          >
+            <VStack>
+              <Image
+                src="/russian.png"
+                alt="러시안 룰렛"
+                w="55px"
+                mb={-1}
+              />
+              <Text fontWeight={600} color="#F19C7A">
+                러시안 룰렛
+              </Text>
+              <Text fontSize="12px" fontWeight={250} color="gray.500">
+                순서대로 술을 채우고<br/>
+                방아쇠 당기기!
+              </Text>
+            </VStack>
+          </Button>
+        </HStack>
       </Box>
       <Box
         display="flex"

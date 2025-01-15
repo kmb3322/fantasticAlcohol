@@ -16,6 +16,7 @@ import {
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { useRouletteContext } from "../context/RouletteContext";
+import { useNavigate } from "react-router-dom";
 
 // 사운드 파일 임포트
 import emptyGunshotSound from "../assets/empty-gunshot.mp3";
@@ -51,6 +52,7 @@ const Russian: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태
   const [animationType, setAnimationType] = useState<"empty" | "real" | null>(null); // 애니메이션 종류
   const toast = useToast();
+  const navigate = useNavigate();
 
   // 사운드 객체 생성
   const emptyGunshot = new Audio(emptyGunshotSound);
@@ -147,6 +149,12 @@ const Russian: React.FC = () => {
     initializeGame();
   };
 
+  // 홈으로 이동하는 함수 추가
+  const handleGoHome = () => {
+    navigate('/');
+    setIsModalOpen(false);
+  };
+
   {/*
   // 플레이어 이름 수정 핸들러
   const handleNameChange = (index: number, newName: string) => {
@@ -218,16 +226,31 @@ const Russian: React.FC = () => {
       {/* 당첨자 모달 */}
       <Modal isOpen={isModalOpen} onClose={handleModalClose} isCentered>
         <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>게임 종료</ModalHeader>
+        <ModalContent p={4} borderRadius="15px">
           <ModalBody>
-            <Text fontSize="lg">
-              {selectedPlayer}님이 총에 맞았습니다!
+          <Box mb="30px">
+            <Text fontSize="18px" fontWeight={600} textAlign="center" whiteSpace="pre-line">
+            🎉빵!🎉
             </Text>
+          </Box>
+          <Box mb="30px">
+          <Text fontSize="lg" textAlign="center">
+              {selectedPlayer}님이 걸렸습니다!<br/>
+              지금까지 따라진 술 원샷❤️
+            </Text>
+          </Box>
           </ModalBody>
-          <ModalFooter>
-            <Button colorScheme="blue" onClick={handleModalClose}>
+          <ModalFooter justifyContent="space-around">
+            <Button variant="outline" size="lg" onClick={handleModalClose}>
               다시 시작
+            </Button>
+            <Button variant="solid"
+            bg="#F19C7A"
+            color="white"
+            _hover={{ bg: "#e58c63" }}
+            _active={{ bg: "#d16f46" }}
+            size="lg" onClick={handleGoHome}>
+              게임 종료
             </Button>
           </ModalFooter>
         </ModalContent>

@@ -93,7 +93,7 @@ function DrinkGameLobby() {
                 w="55px"
                 mb={2}
               />
-              <Text fontWeight={600} color="#F19C7A">
+              <Text fontWeight={600} color="#F19C7A#F19C7A">
                 맥주잔 게임
               </Text>
               <Text fontSize="sm" color="gray.500">
