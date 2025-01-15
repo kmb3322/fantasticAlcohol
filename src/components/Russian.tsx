@@ -1,24 +1,21 @@
 // src/components/RussianRoulette.tsx
 
-import React, { useState, useEffect } from "react";
 import {
   Box,
   Button,
-  Text,
   Image,
-  VStack,
-  HStack,
-  Input,
   Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
   ModalBody,
+  ModalContent,
   ModalFooter,
-  useToast,
+  ModalHeader,
+  ModalOverlay,
+  Text,
+  useToast
 } from "@chakra-ui/react";
+import { AnimatePresence, motion } from "framer-motion";
+import React, { useEffect, useState } from "react";
 import { useRouletteContext } from "../context/RouletteContext";
-import { motion, AnimatePresence } from "framer-motion";
 
 // 사운드 파일 임포트
 import emptyGunshotSound from "../assets/empty-gunshot.mp3";
@@ -46,7 +43,7 @@ const gunVariants = {
 const Russian: React.FC = () => {
   const { playerCount } = useRouletteContext(); // 참가 인원 가져오기
   const [players, setPlayers] = useState<string[]>([]); // 플레이어 이름
-  const [results, setResults] = useState<string[]>([]); // 결과 값
+  //const [results, setResults] = useState<string[]>([]); // 결과 값
   const [currentCount, setCurrentCount] = useState(0); // 현재 클릭 수
   const [targetNumber, setTargetNumber] = useState(0); // 목표 클릭 수
   const [isGameOver, setIsGameOver] = useState(false); // 게임 종료 여부
@@ -79,6 +76,8 @@ const Russian: React.FC = () => {
       }
       return updatedPlayers;
     });
+
+{/* 
     // 결과 값 초기화
     setResults((prevResults) => {
       const updatedResults = [...prevResults];
@@ -90,7 +89,11 @@ const Russian: React.FC = () => {
       }
       return updatedResults;
     });
+*/}
+
+
   };
+
 
   // 컴포넌트 마운트 시 게임 초기화
   useEffect(() => {
@@ -144,6 +147,7 @@ const Russian: React.FC = () => {
     initializeGame();
   };
 
+  {/*
   // 플레이어 이름 수정 핸들러
   const handleNameChange = (index: number, newName: string) => {
     const updatedPlayers = [...players];
@@ -157,6 +161,7 @@ const Russian: React.FC = () => {
     updatedResults[index] = newResult;
     setResults(updatedResults);
   };
+ */}
 
   return (
     <Box textAlign="center" mt={10} px={4}>
