@@ -240,6 +240,11 @@ function BalloonGame({ roomCode, isHost, onGoHome }: BalloonGameProps) {
                 />
               )}
             </AnimatePresence>
+            {balloonPopped && (
+            <Text color="red.500" mt={-200} mb={200} fontSize={40} fontWeight={700}>
+              탈락
+            </Text>
+          )}
             <Button 
               colorScheme="pink" 
               onClick={handleBlow} 
@@ -247,6 +252,7 @@ function BalloonGame({ roomCode, isHost, onGoHome }: BalloonGameProps) {
             >
               바람 불기
             </Button>
+            
           </VStack>
         </Box>
       )}
