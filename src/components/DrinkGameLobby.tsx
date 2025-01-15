@@ -34,7 +34,7 @@ function DrinkGameLobby() {
             alt="drink logo"
           />
           <Text fontWeight={700} fontSize="28px" opacity={0.8} mb="-2px">
-            AI 술잔 용량 맞추기
+            AI 술 양 맞추기
           </Text>
           <Text fontSize="14px" color="#666">
             주어진 용량 이상으로 따르면, 맛있게 마시고 😋
