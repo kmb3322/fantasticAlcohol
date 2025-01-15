@@ -39,13 +39,12 @@ Android/iOS/Windows/macOS 를 비롯한 **모든 플랫폼에서 호환 가능�
 
 **모든 디바이스에서 일관된 사용자 경험**을 제공합니다.
 
-![ai 로비.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/fcb7c050-52b3-4f85-ac11-13f340317355/ai_%EB%A1%9C%EB%B9%84.png)
+![Screenshot 2025-01-15 at 17 50 38](https://github.com/user-attachments/assets/488ccb4c-494c-4775-9c43-b62afd9baea2)
+![Screenshot 2025-01-15 at 17 50 47](https://github.com/user-attachments/assets/4bcb7ef7-d614-4aae-b459-fa43d797df50)
+![Screenshot 2025-01-15 at 17 50 57](https://github.com/user-attachments/assets/f8d37f62-9c44-405d-930c-fdb354ec6b33)
+![Screenshot 2025-01-15 at 18 12 44](https://github.com/user-attachments/assets/a459b0ac-3ec2-4afb-a3e8-28f75c5f2c8c)
 
-![룰렛 로비.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/4659a01b-55d7-41ca-aab3-ef54137121e4/%EB%A3%B0%EB%A0%9B_%EB%A1%9C%EB%B9%84.png)
 
-![고양이 로비.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/bf87a790-14bc-44a8-acc9-0bc365b93d01/%EA%B3%A0%EC%96%91%EC%9D%B4_%EB%A1%9C%EB%B9%84.png)
-
-![풍선 로비.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/32de69b1-0e43-4b13-992d-dd9705cbb21c/%ED%92%8D%EC%84%A0_%EB%A1%9C%EB%B9%84.png)
 
 ---
 
@@ -77,11 +76,6 @@ Android/iOS/Windows/macOS 를 비롯한 **모든 플랫폼에서 호환 가능�
 
 ## **■ AI 술 양 맞추기 :: 하나의 폰으로 다함께!**
 
-![변환 ai소주.gif](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/7b4bded1-c43a-4137-8271-65a1e69b28a8/%E1%84%87%E1%85%A7%E1%86%AB%E1%84%92%E1%85%AA%E1%86%AB_ai%E1%84%89%E1%85%A9%E1%84%8C%E1%85%AE.gif)
-
-![변환 ai맥주.gif](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/6eb2d0e4-5df0-4111-8c16-61be453b4552/%E1%84%87%E1%85%A7%E1%86%AB%E1%84%92%E1%85%AA%E1%86%AB_ai%E1%84%86%E1%85%A2%E1%86%A8%E1%84%8C%E1%85%AE.gif)
-
-<aside>
 
 1️⃣ 작은 용량의 **소주잔**과 적당한 용량의 **맥주잔** 중 선택
 
@@ -95,11 +89,6 @@ Android/iOS/Windows/macOS 를 비롯한 **모든 플랫폼에서 호환 가능�
 
 ## **■ 룰렛 게임 :: 하나의 폰으로 다함께!**
 
-![변환 룰렛.gif](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/cf5add0f-a5d0-4c8b-9e36-64dd4f3320d4/%E1%84%87%E1%85%A7%E1%86%AB%E1%84%92%E1%85%AA%E1%86%AB_%E1%84%85%E1%85%AE%E1%86%AF%E1%84%85%E1%85%A6%E1%86%BA.gif)
-
-![변환 러시안.gif](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/9798e9db-2f4c-414d-8a74-87422c7cdaa8/%E1%84%87%E1%85%A7%E1%86%AB%E1%84%92%E1%85%AA%E1%86%AB_%E1%84%85%E1%85%A5%E1%84%89%E1%85%B5%E1%84%8B%E1%85%A1%E1%86%AB.gif)
-
-<aside>
 
 1️⃣ 당첨 룰렛, 러시안 룰렛 중 선택 
 
@@ -121,10 +110,6 @@ Android/iOS/Windows/macOS 를 비롯한 **모든 플랫폼에서 호환 가능�
 
 [변환 고양이스토리.mp4](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/69ac688a-705c-4dc6-9453-499c0515cf62/%E1%84%87%E1%85%A7%E1%86%AB%E1%84%92%E1%85%AA%E1%86%AB_%E1%84%80%E1%85%A9%E1%84%8B%E1%85%A3%E1%86%BC%E1%84%8B%E1%85%B5%E1%84%89%E1%85%B3%E1%84%90%E1%85%A9%E1%84%85%E1%85%B5.mp4)
 
-![변환 고양이.gif](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/3e5785da-7133-4e93-9ca6-ab93b3e4ff96/%E1%84%87%E1%85%A7%E1%86%AB%E1%84%92%E1%85%AA%E1%86%AB_%E1%84%80%E1%85%A9%E1%84%8B%E1%85%A3%E1%86%BC%E1%84%8B%E1%85%B5.gif)
-
-<aside>
-
 1️⃣ **고양이가 쫓기게 된 사연**을 담은, **슬픈 애니메이션 스토리**를 즐겨보세요😿
 
 2️⃣ **방장**은 닉네임 입력 후 **새로운 방 개설**
@@ -139,9 +124,6 @@ Android/iOS/Windows/macOS 를 비롯한 **모든 플랫폼에서 호환 가능�
 
 ## **■ 풍선 불기 :: 각자 폰으로 다함께!**
 
-![변환 풍선.gif](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/eb3a5486-5986-4506-bc67-d76c315d8510/%E1%84%87%E1%85%A7%E1%86%AB%E1%84%92%E1%85%AA%E1%86%AB_%E1%84%91%E1%85%AE%E1%86%BC%E1%84%89%E1%85%A5%E1%86%AB.gif)
-
-<aside>
 
 1️⃣ **방장**은 닉네임 입력 후 **새로운 방 개설**
 
