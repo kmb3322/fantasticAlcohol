@@ -1,4 +1,5 @@
-![Screenshot 2025-01-15 at 17.16.10.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/bb721dd7-a224-455e-aa21-282037c5c416/Screenshot_2025-01-15_at_17.16.10.png)
+
+![Screenshot 2025-01-15 at 17 16 18](https://github.com/user-attachments/assets/5c5b4bff-8fbf-4432-8dc7-4386d2dd5df3)
 
 # https://soju.monster
 
@@ -15,7 +16,8 @@
 
 ## **1. 누구나 쉽게 즐길 수 있는**
 
-![홈화면.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/ab73da48-8cea-4609-8cb8-998478357731/%ED%99%88%ED%99%94%EB%A9%B4.png)
+![Screenshot 2025-01-15 at 18 12 23](https://github.com/user-attachments/assets/ea619a96-c1db-488d-8178-ec3a8b6ffa9f)
+
 
 수많은 테스트를 통해, **누구나 만취 상태에서도 쉽게 접근할 수 있는 UI**를 설계하는 데에 성공했습니다.
 
