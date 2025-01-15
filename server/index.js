@@ -120,14 +120,17 @@ app.post('/analyze', (req, res) => {
         obj.name.toLowerCase().includes('glass') ||
         obj.name.toLowerCase().includes('cup') ||
         obj.name.toLowerCase().includes('drink') ||
-        obj.name.toLowerCase().includes('tableware')
+        obj.name.toLowerCase().includes('tableware') ||
+        obj.name.toLowerCase().includes('beer') ||
+        obj.name.toLowerCase().includes('soju') ||
+        obj.name.toLowerCase().includes('mug') // TODO: test해보고 수정&추가해야함
       );
 
-      console.log('소주잔 감지 여부:', glassFound);
+      console.log('잔 감지 여부:', glassFound);
 
       if (!glassFound) {
         return res.status(400).json({
-          error: '이미지에서 소주잔을 찾을 수 없습니다.',
+          error: '이미지에서 잔을 찾을 수 없습니다.',
           detected_objects: objects.map(obj => obj.name)
         });
       }
@@ -141,7 +144,7 @@ app.post('/analyze', (req, res) => {
             content: [
               {
                 type: "text",
-                text: "이 이미지의 소주잔에 담긴 소주의 양을 ml 단위로 숫자만 답변해주세요. 예시: 25"
+                text: "이 이미지의 잔에 담긴 음료의 양을 ml 단위로 숫자만 답변해주세요. 소주잔은 20~50ml, 맥주잔은 max 100~225ml. 예시: 25"
               },
               {
                 type: "image_url",

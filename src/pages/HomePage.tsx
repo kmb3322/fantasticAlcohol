@@ -25,9 +25,9 @@ function HomePage() {
           </Text>
 
           <Flex direction="row" gap="23px" mt="100px">
-            <SvgButton onClick={() => navigate('/soju')} 
-              overlayImage="/soju.png"
-              overlayText="소주잔 따르기"
+            <SvgButton onClick={() => navigate('/drink')} 
+              overlayImage="/drink.png"
+              overlayText="AI 술잔 예측"
               overlaySubtext="장인의 모먼트를 보여주세요!"
               textColor="#F19C7A"
               />
