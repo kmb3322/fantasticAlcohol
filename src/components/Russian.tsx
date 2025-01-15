@@ -77,7 +77,7 @@ const Russian: React.FC = () => {
       return updatedPlayers;
     });
 
-{/* 
+    {/* 
     // 결과 값 초기화
     setResults((prevResults) => {
       const updatedResults = [...prevResults];
@@ -164,43 +164,33 @@ const Russian: React.FC = () => {
  */}
 
   return (
-    <Box textAlign="center" mt={10} px={4}>
-      <Text fontSize="2xl" fontWeight="bold" mb={6}>
-        러시안 룰렛
-      </Text>
-      <AnimatePresence>
-        <MotionImage
-          src={revolverImage}
-          alt="Gun"
-          height="80%"
-          width="auto"
-          mx="auto"
-          variants={gunVariants}
-          animate={animationType || "idle"}
-          // key={animationType}
-          // mb={6}
-        />
-      </AnimatePresence>
-      {/* 플레이어 번호 표시 */}
-      {/* <HStack spacing={4} justifyContent="center" mb={6}>
-        {Array.from({ length: playerCount }, (_, index) => (
-          <Box
-            key={index}
-            w="60px"
-            h="60px"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            border="2px solid"
-            borderColor="teal.500"
-            borderRadius="md"
-          >
-            <Text fontSize="lg" fontWeight="bold">
-              {index + 1}
-            </Text>
-          </Box>
-        ))}
-      </HStack> */}
+    <Box
+      textAlign="center"
+      mt={10}
+      px={4}
+      // height="calc(100vh - 100px)"
+      display="flex"
+      flexDirection="column"
+      justifyContent="space-between" // 요소들 사이에 공간을 균등하게 배분
+      alignItems="center"
+    >
+      <Box flex="1" display="flex" flexDirection="column" justifyContent="center">
+        <Text fontSize="2xl" fontWeight="bold" mb={6}>
+          러시안 룰렛
+        </Text>
+        <AnimatePresence>
+          <MotionImage
+            src={revolverImage}
+            alt="Gun"
+            maxHeight="60vh" // 뷰포트 높이의 30%로 제한
+            width="auto"
+            mx="auto"
+            objectFit="contain"
+            variants={gunVariants}
+            animate={animationType || "idle"}
+          />
+        </AnimatePresence>
+      </Box>
 
       {/* 현재 클릭 수 표시 */}
       <Box mb={6}>
