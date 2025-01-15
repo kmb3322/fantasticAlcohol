@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 
-type RouletteType = '당첨 룰렛' | '비율 룰렛';
+type RouletteType = '당첨 룰렛' | '러시안 룰렛';
 
 interface RouletteContextProps {
   rouletteType: RouletteType;

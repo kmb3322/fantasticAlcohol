@@ -31,7 +31,7 @@ function HomePage() {
               overlaySubtext="장인의 모먼트를 보여주세요!"
               textColor="#F19C7A"
               />
-            <SvgButton onClick={() => navigate('/random')}
+            <SvgButton onClick={() => navigate('/roulette')}
               overlayImage="/roulette.png"
               overlayText="룰렛 게임"
               overlaySubtext="역시 인생은 복불복!"

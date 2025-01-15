@@ -10,6 +10,7 @@ import BalloonLobbyPage from './pages/BalloonLobbyPage';
 import GamePage from './pages/GamePage';
 import HomePage from './pages/HomePage';
 import LobbyPage from './pages/LobbyPage';
+import Russian from './components/Russian';
 import DrinkGameLobby from './components/DrinkGameLobby';
 import BeerGame from './components/BeerGame';
 
@@ -25,8 +26,9 @@ function App() {
           <Route path="/drink/beer" element={<BeerGame />} />
           <Route path="/lobby" element={<LobbyPage />} />
           <Route path="/game" element={<GamePage />} />
-          <Route path="/random" element={<RouletteGameLobby />} />
-          <Route path="/random/roulette" element={<Winner />} />
+          <Route path="/roulette" element={<RouletteGameLobby />} />
+          <Route path="/roulette/winner" element={<Winner />} />
+          <Route path="/roulette/russian" element={<Russian />} />
           {/* 풍선불기 게임 관련 라우트 추가 */}
           <Route path="/balloon/lobby" element={<BalloonLobbyPage />} />
           <Route path="/balloon/game" element={<BalloonGamePage />} />
