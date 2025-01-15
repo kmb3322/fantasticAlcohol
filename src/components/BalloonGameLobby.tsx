@@ -1,13 +1,13 @@
 // src/components/BalloonGameLobby.tsx
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 import {
-    Box,
-    Button,
-    FormLabel,
-    IconButton,
-    Image,
-    Input,
-    Text
+  Box,
+  Button,
+  FormLabel,
+  IconButton,
+  Image,
+  Input,
+  Text
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { socket } from '../socket';
@@ -94,7 +94,7 @@ function BalloonGameLobby({ onJoinedRoom }: BalloonGameLobbyProps) {
         <Text fontWeight={700} fontSize="28px" opacity={0.8} mb="-2px">
           풍선 불기
         </Text>
-        <Text fontSize="14px" color="#666">
+        <Text fontSize="14px" color="gray.500">
           최대한 크게 풍선을 불어주세요!
         </Text>
       </Box>

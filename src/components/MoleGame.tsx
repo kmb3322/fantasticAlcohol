@@ -179,9 +179,10 @@ function MoleGame({ roomCode, isHost, onGoHome }: MoleGameProps) {
         {/* 게임 시작 전일 때 방 코드와 접속자 수 표시 */}
         {!gameStarted && (
           <>
-            <Text fontSize="sm" mt={-2} color="gray.500">
-              최소 2명, 최대 8명이 함께 플레이 가능합니다.
-            </Text>
+            <Text fontSize="14px" mt={-3} color="gray.500">
+            30초 동안 튀어나오는 고양이를 가장 많이 잡으면 우승!
+          </Text>
+            
             <Text fontSize={16} color="gray.500" mt={5} mb={-5}>
               방 코드
             </Text>
@@ -193,6 +194,9 @@ function MoleGame({ roomCode, isHost, onGoHome }: MoleGameProps) {
             </Text>
             <Text fontSize="38px" fontWeight={700} color="#14ACA4">
               {playerList.length}명
+            </Text>
+            <Text fontSize="sm" mt={-4} color="gray.500">
+              최소 2명, 최대 8명이 함께 플레이 가능합니다.
             </Text>
           </>
         )}

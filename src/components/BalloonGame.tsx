@@ -5,15 +5,15 @@ import BalloonGameWaiting from './BalloonGameWaiting';
 
 // Chakra UI 및 Framer Motion
 import {
-    Box,
-    Button,
-    Divider,
-    Heading,
-    Image,
-    ListItem,
-    OrderedList,
-    Text,
-    VStack,
+  Box,
+  Button,
+  Divider,
+  Heading,
+  Image,
+  ListItem,
+  OrderedList,
+  Text,
+  VStack,
 } from '@chakra-ui/react';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -33,6 +33,9 @@ type BalloonGameProps = {
 };
 
 const MotionBox = motion(Box);
+
+// 풍선 터질 때 재생할 소리 객체 생성
+const popSound = new Audio('/pop.mp3');
 
 function BalloonGame({ roomCode, isHost, onGoHome }: BalloonGameProps) {
   const [playerList, setPlayerList] = useState<IPlayer[]>([]);
@@ -76,6 +79,7 @@ function BalloonGame({ roomCode, isHost, onGoHome }: BalloonGameProps) {
       // 자신이 터뜨린 경우에만 처리
       if (socket.id === socketId) {
         setBalloonPopped(true);
+        popSound.play(); // 풍선 터질 때 소리 재생
       }
     };
     socket.on('balloon:popped', handleBalloonPopped);
@@ -100,6 +104,12 @@ function BalloonGame({ roomCode, isHost, onGoHome }: BalloonGameProps) {
 
   const handleBlow = () => {
     if (balloonPopped) return;
+
+    // 디바이스 진동 효과 (지원 시)
+    if (navigator.vibrate) {
+      navigator.vibrate(50);
+    }
+
     socket.emit('balloon:blow');
     setBalloonScale(prev => prev + 0.15);
   };
@@ -117,38 +127,43 @@ function BalloonGame({ roomCode, isHost, onGoHome }: BalloonGameProps) {
       </Button>
 
       <VStack align="center" spacing={3}>
-
         {/* 게임 시작 전일 때만 방 코드와 접속자 수 표시 */}
         {!gameStarted && (
           <>
-          <Image
-                  width="211px"
-                  height="94px"
-                  objectFit="contain"
-                  mb="2px"
-                  src="/balloon.png"
-                  alt="balloon logo"
-                />
-                <Text fontWeight={700} fontSize="28px" opacity={0.8} mb="-2px">
-                  풍선 불기
-                </Text>
+            <Image
+              width="211px"
+              height="94px"
+              objectFit="contain"
+              mb="2px"
+              src="/balloon.png"
+              alt="balloon logo"
+            />
+            <Text fontWeight={700} fontSize="28px" opacity={0.8} mb="-2px">
+              풍선 불기
+            </Text>
 
-          <Text fontSize="sm" mt={-2} color="gray.500">
-            최소 2명, 최대 8명이 함께 플레이 가능합니다.
-          </Text>
-          <Text fontSize={16} color="gray.500" mt={5} mb={-5}>
-            방 코드
-          </Text>
-          <Text fontSize="38px" fontWeight={700} color="#14ACA4" mb={-3}>
-            {roomCode}
-          </Text>
-          <Text fontSize={16} color="gray.500" mt={5} mb={-5}>
-            접속자
-          </Text>
-          <Text fontSize="38px" fontWeight={700} color="#14ACA4">
-            {playerList.length}명
-          </Text>
-        </>
+            <Text fontSize="sm" mt={-2} color="gray.500">
+              풍선 불기 버튼으로, 20초 내에 가장 큰 풍선을 불어주세요!
+            </Text>
+            <Text fontSize="sm" mt={-2} color="gray.500">
+              너무 크게 불면 터져 버릴 수도 있어요.
+            </Text>
+            <Text fontSize={16} color="gray.500" mt={5} mb={-5}>
+              방 코드
+            </Text>
+            <Text fontSize={38} fontWeight={700} color="#14ACA4" mb={-3}>
+              {roomCode}
+            </Text>
+            <Text fontSize={16} color="gray.500" mt={5} mb={-5}>
+              접속자
+            </Text>
+            <Text fontSize={38} fontWeight={700} color="#14ACA4">
+              {playerList.length}명
+            </Text>
+            <Text fontSize="sm" mt={-4} color="gray.500">
+              최소 2명, 최대 8명이 함께 플레이 가능합니다.
+            </Text>
+          </>
         )}
       </VStack>
 
@@ -162,19 +177,20 @@ function BalloonGame({ roomCode, isHost, onGoHome }: BalloonGameProps) {
         />
       ) : (
         <Box textAlign="center">
-            <Text fontSize={30} color="red.600" fontWeight={700} mb={7}>풍선을 불어보세요!</Text>
+          <Text fontSize={30} color="red.600" fontWeight={700} mb={7}>
+            풍선을 불어보세요!
+          </Text>
 
-            <Text fontSize={16} color="gray.500" mt={5} mb={-2}>
+          <Text fontSize={16} color="gray.500" mt={5} mb={-2}>
             남은 시간
           </Text>
-       
-          <Text fontSize="38px" fontWeight={700} color="#14ACA4" mb={150}>
+
+          <Text fontSize={38} fontWeight={700} color="#14ACA4" mb={150}>
             {timeLeft}초
           </Text>
           <VStack spacing={4}>
-            
             <AnimatePresence>
-              {!balloonPopped && (
+              {!balloonPopped ? (
                 <MotionBox
                   key="balloon"
                   width="150px"
@@ -197,19 +213,18 @@ function BalloonGame({ roomCode, isHost, onGoHome }: BalloonGameProps) {
                     }
                   }}
                 />
-              )}
-              {balloonPopped && (
+              ) : (
                 <MotionBox
-                  key="failed"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
+                  key="pop"
+                  width="150px"
+                  height="200px"
+                  backgroundImage="url('/balloon.png')"
+                  backgroundSize="contain"
+                  backgroundRepeat="no-repeat"
+                  initial={{ scale: balloonScale, opacity: 1 }}
+                  animate={{ scale: balloonScale * 2, opacity: 0 }}
                   transition={{ duration: 0.5 }}
-                >
-                  <Text fontSize="2xl" fontWeight="bold" color="red.500">
-                    탈락
-                  </Text>
-                </MotionBox>
+                />
               )}
             </AnimatePresence>
             <Button 
