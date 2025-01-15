@@ -9,9 +9,9 @@ const RouletteGameLobby: React.FC = () => {
 
   const handleStart = () => {
     if (rouletteType === '당첨 룰렛') {
-      navigate('/random/roulette');
+      navigate('/roulette/winner');
     } else {
-      navigate('/random/russian');
+      navigate('/roulette/russian');
     }
   };
 

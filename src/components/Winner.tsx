@@ -1,21 +1,22 @@
 // src/components/Winner.tsx
-import {
-  Box,
-  Button,
-  Input,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  Text,
-  useDisclosure
-} from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
+import {
+  VStack,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Text,
+  Button,
+  Box,
+  Input,
+  useDisclosure,
+} from '@chakra-ui/react';
+import { useRouletteContext } from '../context/RouletteContext';
 import { Wheel } from 'react-custom-roulette';
 import { useNavigate } from 'react-router-dom';
-import { useRouletteContext } from '../context/RouletteContext';
 
 interface SegmentData {
   option: string;

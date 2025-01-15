@@ -18,10 +18,30 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useRouletteContext } from "../context/RouletteContext";
+import { motion, AnimatePresence } from "framer-motion";
 
 // 사운드 파일 임포트
 import emptyGunshotSound from "../assets/empty-gunshot.mp3";
 import realGunshotSound from "../assets/real-gunshot.mp3";
+
+import revolverImage from "../assets/revolver.png";
+
+const MotionImage = motion(Image);
+
+const gunVariants = {
+  idle: {
+    rotate: 0,
+    y: 0
+  },
+  empty: {
+    rotate: [15, 0],
+    transition: { duration: 0.3 }
+  },
+  real: {
+    y: [0, 20, 0],
+    transition: { duration: 0.3 }
+  }
+};
 
 const Russian: React.FC = () => {
   const { playerCount } = useRouletteContext(); // 참가 인원 가져오기
@@ -32,6 +52,7 @@ const Russian: React.FC = () => {
   const [isGameOver, setIsGameOver] = useState(false); // 게임 종료 여부
   const [selectedPlayer, setSelectedPlayer] = useState<string>(""); // 당첨 플레이어
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태
+  const [animationType, setAnimationType] = useState<"empty" | "real" | null>(null); // 애니메이션 종류
   const toast = useToast();
 
   // 사운드 객체 생성
@@ -46,6 +67,7 @@ const Russian: React.FC = () => {
     setCurrentCount(0);
     setIsGameOver(false);
     setSelectedPlayer("");
+    setAnimationType(null); // 애니메이션 초기화
     // 플레이어 수에 맞게 플레이어 이름 초기화
     setPlayers((prevPlayers) => {
       const updatedPlayers = [...prevPlayers];
@@ -93,6 +115,7 @@ const Russian: React.FC = () => {
     if (nextCount === targetNumber) {
       // 진짜 총소리 재생
       realGunshot.play();
+      setAnimationType("real"); // 애니메이션 타입 설정
 
       // 당첨 플레이어 결정
       const playerIndex = (nextCount - 1) % playerCount;
@@ -104,9 +127,15 @@ const Russian: React.FC = () => {
     } else {
       // 빈 총소리 재생
       emptyGunshot.play();
+      setAnimationType("empty"); // 애니메이션 타입 설정
     }
 
     setCurrentCount(nextCount);
+
+    // 애니메이션 완료 후 상태 초기화
+    setTimeout(() => {
+      setAnimationType(null);
+    }, animationType === "real" ? 600 : 300); // 애니메이션 지속 시간과 일치시킵니다.
   };
 
   // 모달 닫기 핸들러
@@ -134,16 +163,21 @@ const Russian: React.FC = () => {
       <Text fontSize="2xl" fontWeight="bold" mb={6}>
         러시안 룰렛
       </Text>
-      <Image
-          width="100%"
-          height="100%"
-          objectFit="contain"
-          mb="2px"
-          src="/revolver.png"
+      <AnimatePresence>
+        <MotionImage
+          src={revolverImage}
+          alt="Gun"
+          height="80%"
+          width="auto"
+          mx="auto"
+          variants={gunVariants}
+          animate={animationType || "idle"}
+          // key={animationType}
+          // mb={6}
         />
-
+      </AnimatePresence>
       {/* 플레이어 번호 표시 */}
-      <HStack spacing={4} justifyContent="center" mb={6}>
+      {/* <HStack spacing={4} justifyContent="center" mb={6}>
         {Array.from({ length: playerCount }, (_, index) => (
           <Box
             key={index}
@@ -161,7 +195,7 @@ const Russian: React.FC = () => {
             </Text>
           </Box>
         ))}
-      </HStack>
+      </HStack> */}
 
       {/* 현재 클릭 수 표시 */}
       <Box mb={6}>
@@ -172,9 +206,14 @@ const Russian: React.FC = () => {
 
       {/* 버튼 */}
       <Button
-        colorScheme="red"
+        bg="#F19C7A"
+        w="195px"
+        // h="52px"
+        borderRadius="20px"
+        color="white"
+        _hover={{ bg: "#e58c63" }}
+        _active={{ bg: "#d16f46" }}
         onClick={handleButtonClick}
-        size="lg"
         isDisabled={isGameOver}
         mb={6}
       >

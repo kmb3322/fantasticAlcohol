@@ -22,9 +22,9 @@ function App() {
           <Route path="/soju" element={<SojuGame />} />
           <Route path="/lobby" element={<LobbyPage />} />
           <Route path="/game" element={<GamePage />} />
-          <Route path="/random" element={<RouletteGameLobby />} />
-          <Route path="/random/roulette" element={<Winner />} />
-          <Route path="/random/russian" element={<Russian />} />
+          <Route path="/roulette" element={<RouletteGameLobby />} />
+          <Route path="/roulette/winner" element={<Winner />} />
+          <Route path="/roulette/russian" element={<Russian />} />
           {/* 풍선불기 게임 관련 라우트 추가 */}
           <Route path="/balloon/lobby" element={<BalloonLobbyPage />} />
           <Route path="/balloon/game" element={<BalloonGamePage />} />
