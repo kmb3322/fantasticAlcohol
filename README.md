@@ -174,7 +174,7 @@ Android/iOS/Windows/macOS 를 비롯한 **모든 플랫폼에서 호환 가능�
 > AWS EC2
 > 
 
-![aws.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/6822bd39-56a8-4989-b2da-3ed58a442198/d6428696-6821-465d-9900-0ba1f79109ff.png)
+
 
 # 👥Team
 
