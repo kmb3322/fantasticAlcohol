@@ -136,7 +136,7 @@ function SojuGame() {
         setResultMessage(`앗 아쉬워요😢\n목표 용량보다 적게 따랐어요\n꽉 채워서 마시기☠️`);
       } else {
         //setResultType("exact");
-        setResultMessage(`장인이시네요🤩\n딱 맞게 따랐어요!\n맛있게 마시😋`);
+        setResultMessage(`장인이시네요🤩\n딱 맞게 따랐어요!\n맛있게 마시기😋`);
       }
 
       setIsModalOpen(true);

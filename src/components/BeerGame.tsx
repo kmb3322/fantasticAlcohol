@@ -125,13 +125,15 @@ function BeerGame() {
       // 서버로부터 받은 예측 용량 설정
       setPredictedVolume(volume);
 
-      // 결과 판정
       if (volume > targetVolume + 2) {
-        setResultMessage(`목 말랐군요😉\n목표 용량보다 많이 따랐어요`);
+        //setResultType("more");
+        setResultMessage(`목 말랐군요😉\n목표 용량보다 많이 따랐어요\n맛있게 마시기😸`);
       } else if (volume < targetVolume - 2) {
-        setResultMessage(`앗 아쉬워요😢\n목표 용량보다 적게 따랐어요`);
+        //setResultType("less");
+        setResultMessage(`앗 아쉬워요😢\n목표 용량보다 적게 따랐어요\n꽉 채워서 마시기☠️`);
       } else {
-        setResultMessage(`장인이시네요🤩\n딱 맞게 따랐어요!`);
+        //setResultType("exact");
+        setResultMessage(`장인이시네요🤩\n딱 맞게 따랐어요!\n맛있게 마시기😋`);
       }
 
       setIsModalOpen(true);
