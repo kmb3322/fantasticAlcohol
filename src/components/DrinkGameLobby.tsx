@@ -18,15 +18,24 @@ function DrinkGameLobby() {
     >
       <VStack spacing={8} align="center">
         {/* 메인 타이틀 */}
-        <Box textAlign="center" mb={6}>
-          <Heading
-            fontSize="32px"
-            fontWeight={700}
-            color="#333"
-            mb={3}
-          >
+        <Box
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        textAlign="center"
+        mb="10px"
+      >
+        <Image
+          width="211px"
+          height="94px"
+          objectFit="contain"
+          mb="2px"
+          src="/drink.png"
+          alt="drink logo"
+        />
+          <Text fontWeight={700} fontSize="28px" opacity={0.8} mb="-2px">
             AI 술잔 용량 맞추기
-          </Heading>
+            </Text>
           <Text fontSize="14px" color="#666">
             주어진 용량 이상으로 따르면, 맛있게 마시고 😋
           </Text>
@@ -53,7 +62,7 @@ function DrinkGameLobby() {
               <Image
                 src="/soju.png"
                 alt="소주"
-                w="60px"
+                w="55px"
                 mb={2}
               />
               <Text fontWeight={600} color="#F19C7A">
@@ -81,10 +90,10 @@ function DrinkGameLobby() {
               <Image
                 src="/beer.png"
                 alt="맥주"
-                w="60px"
+                w="55px"
                 mb={2}
               />
-              <Text fontWeight={600} color="#F19C7A">
+              <Text fontWeight={600} color="#F19C7A#F19C7A">
                 맥주잔 게임
               </Text>
               <Text fontSize="sm" color="gray.500">

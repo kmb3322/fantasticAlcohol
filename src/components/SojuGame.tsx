@@ -189,7 +189,7 @@ function SojuGame() {
         flexDirection="column"
         alignItems="center"
         textAlign="center"
-        mb="30px"
+        mb="20px"
       >
         <Image
           width="211px"
@@ -209,7 +209,7 @@ function SojuGame() {
       <Box
         display="flex"
         flexDirection="column"
-        mb="40px"
+        mb="30px"
       >
         <Text fontSize="lg" color="#F19C7A" fontWeight={600}>
           목표 용량: {targetVolume}ml
@@ -219,15 +219,15 @@ function SojuGame() {
       {/* 카메라 영역 + 소주잔 SVG 가이드 */}
       <Box
         position="relative"
-        width={["80vw", "240px"]} // 모바일에서는 화면 너비의 80%, 데스크탑에서는 240px
+        width={["70vw", "200px"]} // 모바일에서는 화면 너비의 80%, 데스크탑에서는 240px
         aspectRatio="3 / 4" // 세로로 긴 비율 유지
         bg="gray.200"
-        maxW="240px"
+        maxW="200px"
         w="100%"
         overflow="hidden" // 이미지가 넘치지 않도록 설정
         borderRadius="md"
         boxShadow="md"
-        mb="70px"
+        mb="30px"
       >
         <Webcam
           ref={webcamRef}
